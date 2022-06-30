@@ -17,7 +17,7 @@ public class CheckOutBookController implements CheckOutBookUseCase{
 		// TODO Auto-generated method stub
 		
 		
-		Book book = searchBookUseCase.search(bookId);
+		Book book = searchBookUseCase.searchBook(bookId);
 		
 		if(book == null) {
 			System.out.println(bookId);
