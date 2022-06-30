@@ -22,12 +22,12 @@ public class ControllerFactory {
 	}
 	
 	public static CheckBookCopyAvailableUseCase createCheckBookCopyAvailableUseCase() {
-		CheckBookCopyAvailableUseCase useCase = new BookController();
+		CheckBookCopyAvailableUseCase useCase = new BookCopyController();
 		return useCase;
 	}
 	
 	public static AddBookCopyUseCase createAddBookCopyUseCase() {
-		AddBookCopyUseCase useCase = new BookController();
+		AddBookCopyUseCase useCase = new BookCopyController();
 		return useCase;
 	}
 	
@@ -37,7 +37,8 @@ public class ControllerFactory {
 	}
 	
 	public static CheckMemberUseCase createCheckMemberUseCase() {
-		return null;
+		CheckMemberUseCase useCase = new CheckMemberController();
+		return useCase;
 	}
 	
 	public static LogInUseCase createLogInUseCase() {
