@@ -1,6 +1,7 @@
 package business.impl;
 
 import business.usecase.AddBookCopyUseCase;
+import business.usecase.AddBookUseCase;
 import business.usecase.CheckBookCopyAvailableUseCase;
 import business.usecase.SearchBookUseCase;
 
@@ -12,13 +13,18 @@ public class ControllerFactory {
 		return useCase;
 	}
 	
+	public static AddBookUseCase createAddBookUseCase() {
+		AddBookUseCase useCase = new BookController();
+		return useCase;
+	}
+	
 	public static CheckBookCopyAvailableUseCase createCheckBookCopyAvailableUseCase() {
-		CheckBookCopyAvailableUseCase useCase = new BookController();
+		CheckBookCopyAvailableUseCase useCase = new BookCopyController();
 		return useCase;
 	}
 	
 	public static AddBookCopyUseCase createAddBookCopyUseCase() {
-		AddBookCopyUseCase useCase = new BookController();
+		AddBookCopyUseCase useCase = new BookCopyController();
 		return useCase;
 	}
 }
