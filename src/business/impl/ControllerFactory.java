@@ -4,6 +4,7 @@ import business.usecase.AddBookCopyUseCase;
 import business.usecase.CheckBookCopyAvailableUseCase;
 import business.usecase.CheckMemberUseCase;
 import business.usecase.CheckOutBookUseCase;
+import business.usecase.LogInUseCase;
 import business.usecase.SearchBookUseCase;
 
 public class ControllerFactory {
@@ -33,4 +34,11 @@ public class ControllerFactory {
 		return null;
 	}
 	
+	public static LogInUseCase createLogInUseCase() {
+		LogInUseCase useCase = new LogInController();
+		return useCase;
+		
+	}
+	
 }
+

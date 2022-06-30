@@ -1,7 +1,8 @@
 package business.usecase;
 
+import dataaccess.Auth;
 import domain.exception.LoginException;
 
 public interface LogInUseCase {
-	public void login(String id, String password) throws LoginException;
+	public Auth login(String id, String password) throws LoginException;
 }
