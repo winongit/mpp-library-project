@@ -111,17 +111,26 @@ public class LibrarySystem extends JFrame implements LibWindow {
 		options.add(addBookCopy);
 		options.add(addBook);
 		options.add(printCheckOutRecord);
+		
+		doAuth();
+	}
+	
+	private void doAuth() {
+		LibrarySystem.INSTANCE.checkOutBook.setVisible(false);
+		LibrarySystem.INSTANCE.printCheckOutRecord.setVisible(false);
+		
+		LibrarySystem.INSTANCE.addLibraryMember.setVisible(false);
+		LibrarySystem.INSTANCE.addBookCopy.setVisible(false);
+		LibrarySystem.INSTANCE.addBook.setVisible(false);
 	}
 
 	class LoginListener implements ActionListener {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			LibrarySystem.hideAllWindows();
 			LoginWindow.INSTANCE.init();
 			Util.centerFrameOnDesktop(LoginWindow.INSTANCE);
 			LoginWindow.INSTANCE.setVisible(true);
-
 		}
 
 	}
