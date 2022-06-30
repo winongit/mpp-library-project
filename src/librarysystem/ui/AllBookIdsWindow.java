@@ -1,4 +1,4 @@
-package librarysystem;
+package librarysystem.ui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -11,8 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import business.ControllerInterface;
-import business.SystemController;
+import business.impl.SystemController;
+import business.usecase.ControllerInterface;
+import librarysystem.util.Util;
 
 
 public class AllBookIdsWindow extends JFrame implements LibWindow {

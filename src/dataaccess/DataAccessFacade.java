@@ -9,8 +9,8 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 
-import business.Book;
-import business.LibraryMember;
+import domain.Book;
+import domain.LibraryMember;
 
 
 public class DataAccessFacade implements DataAccess {

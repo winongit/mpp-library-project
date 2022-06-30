@@ -1,4 +1,4 @@
-package librarysystem;
+package librarysystem.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,9 +16,15 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import business.impl.SystemController;
+import business.usecase.ControllerInterface;
+import domain.exception.LoginException;
+import librarysystem.util.Util;
+
 
 public class LoginWindow extends JFrame implements LibWindow {
     public static final LoginWindow INSTANCE = new LoginWindow();
+    ControllerInterface ci = new SystemController();
 	
 	private boolean isInitialized = false;
 	
@@ -182,10 +188,21 @@ public class LoginWindow extends JFrame implements LibWindow {
     	
     	private void addLoginButtonListener(JButton butn) {
     		butn.addActionListener(evt -> {
-    			JOptionPane.showMessageDialog(this,"Successful Login");
+    			
+    			String user = username.getText();
+    			String pass = new String (password.getText());
+    			try {
+					ci.login(user, pass);
+					JOptionPane.showMessageDialog(this,"Successful Login");
+				} catch (LoginException e) {
+					e.printStackTrace();
+					JOptionPane.showMessageDialog(this,"Login Failed");
+				}
     				
     		});
     	}
+    	
+    	
 	
         
     

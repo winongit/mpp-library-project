@@ -4,6 +4,8 @@ import java.util.*;
 
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
+import domain.Book;
+import domain.LibraryMember;
 
 public class Main {
 
