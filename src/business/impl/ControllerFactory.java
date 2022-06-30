@@ -2,6 +2,7 @@ package business.impl;
 
 import business.usecase.AddBookCopyUseCase;
 import business.usecase.CheckBookCopyAvailableUseCase;
+import business.usecase.LogInUseCase;
 import business.usecase.SearchBookUseCase;
 
 public class ControllerFactory {
@@ -20,5 +21,11 @@ public class ControllerFactory {
 	public static AddBookCopyUseCase createAddBookCopyUseCase() {
 		AddBookCopyUseCase useCase = new BookController();
 		return useCase;
+	}
+	
+	public static LogInUseCase createLogInUseCase() {
+		LogInUseCase useCase = new LogInController();
+		return useCase;
+		
 	}
 }
