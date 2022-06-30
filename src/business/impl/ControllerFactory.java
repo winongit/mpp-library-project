@@ -14,6 +14,11 @@ public class ControllerFactory {
 		SearchBookUseCase useCase = new BookController();
 		return useCase;
 	}
+  
+  public static AddBookUseCase createAddBookUseCase() {
+		AddBookUseCase useCase = new BookController();
+		return useCase;
+	}
 	
 	public static CheckBookCopyAvailableUseCase createCheckBookCopyAvailableUseCase() {
 		CheckBookCopyAvailableUseCase useCase = new BookController();
@@ -41,4 +46,3 @@ public class ControllerFactory {
 	}
 	
 }
-
