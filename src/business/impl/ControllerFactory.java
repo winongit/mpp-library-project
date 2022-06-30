@@ -1,6 +1,7 @@
 package business.impl;
 
 import business.usecase.AddBookCopyUseCase;
+import business.usecase.AddBookUseCase;
 import business.usecase.CheckBookCopyAvailableUseCase;
 import business.usecase.CheckMemberUseCase;
 import business.usecase.CheckOutBookUseCase;
