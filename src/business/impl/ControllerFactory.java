@@ -1,8 +1,10 @@
 package business.impl;
 
 import business.usecase.AddBookCopyUseCase;
-import business.usecase.AddBookUseCase;
 import business.usecase.CheckBookCopyAvailableUseCase;
+import business.usecase.CheckMemberUseCase;
+import business.usecase.CheckOutBookUseCase;
+import business.usecase.LogInUseCase;
 import business.usecase.SearchBookUseCase;
 
 public class ControllerFactory {
@@ -12,19 +14,35 @@ public class ControllerFactory {
 		SearchBookUseCase useCase = new BookController();
 		return useCase;
 	}
-	
-	public static AddBookUseCase createAddBookUseCase() {
+  
+  public static AddBookUseCase createAddBookUseCase() {
 		AddBookUseCase useCase = new BookController();
 		return useCase;
 	}
 	
 	public static CheckBookCopyAvailableUseCase createCheckBookCopyAvailableUseCase() {
-		CheckBookCopyAvailableUseCase useCase = new BookCopyController();
+		CheckBookCopyAvailableUseCase useCase = new BookController();
 		return useCase;
 	}
 	
 	public static AddBookCopyUseCase createAddBookCopyUseCase() {
-		AddBookCopyUseCase useCase = new BookCopyController();
+		AddBookCopyUseCase useCase = new BookController();
 		return useCase;
 	}
+	
+	public static CheckOutBookUseCase createCheckOutBookUseCase() {
+		CheckOutBookUseCase useCase = new CheckOutBookController();
+		return useCase;
+	}
+	
+	public static CheckMemberUseCase createCheckMemberUseCase() {
+		return null;
+	}
+	
+	public static LogInUseCase createLogInUseCase() {
+		LogInUseCase useCase = new LogInController();
+		return useCase;
+		
+	}
+	
 }
