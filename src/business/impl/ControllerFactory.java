@@ -38,7 +38,7 @@ public class ControllerFactory {
 	}
 	
 	public static CheckMemberUseCase createCheckMemberUseCase() {
-		CheckMemberUseCase useCase = new CheckMemberController();
+		CheckMemberUseCase useCase = new LibraryMemberController();
 		return useCase;
 	}
 	

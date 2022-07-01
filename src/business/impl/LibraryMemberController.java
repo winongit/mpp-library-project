@@ -1,5 +1,7 @@
 package business.impl;
 
+import java.util.HashMap;
+
 import business.usecase.AddLibraryMemberUseCase;
 import business.usecase.CheckMemberUseCase;
 import dataaccess.DataAccess;
@@ -29,9 +31,9 @@ public class LibraryMemberController implements AddLibraryMemberUseCase, CheckMe
 			throw new InvalidMemberException("Invalid Last Name");
 		}
 		
-//		if (checkMember(member.getMemberId())) {
-//			throw new InvalidMemberException("Member ID already exist");
-//		}
+		if (checkMember(member.getMemberId())) {
+			throw new InvalidMemberException("Member ID already exist");
+		}
 		
 		da.saveNewMember(member);
 		
@@ -39,8 +41,9 @@ public class LibraryMemberController implements AddLibraryMemberUseCase, CheckMe
 
 	@Override
 	public boolean checkMember(String memberId) {
-		// TODO Auto-generated method stub
-		return false;
+		DataAccess da = new DataAccessFacade();
+		HashMap<String,LibraryMember> map = da.readMemberMap();
+		return map.get(memberId) != null;	
 	}
 	
 }

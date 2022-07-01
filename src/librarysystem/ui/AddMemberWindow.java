@@ -197,30 +197,40 @@ public class AddMemberWindow extends JFrame implements LibWindow {
 		return member;
 	}
 	
+	private void clearInput() {
+		txtStreet.setText("");
+		txtCity.setText("");
+		txtState.setText("");
+		txtZipCode.setText("");
+		txtMemberId.setText("");
+		txtFirstName.setText("");
+		txtLastName.setText("");
+		txtPhoneNumber.setText("");
+	}
+	
 	private boolean validateInput() {
-		boolean ret = true;
 		if (txtMemberId.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Invalid Member Id");
-			ret = false;
+			return false;
 		}
 		
 		if (txtFirstName.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Invalid First Name");
-			ret = false;
+			return false;
 		}
 		
 		if (txtLastName.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Invalid Last Name");
-			ret = false;
+			return false;
 		}
 		
 		if (txtPhoneNumber.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Invalid Phone Number");
-			ret = false;
+			return false;
 		}
 
 		
-		return ret;
+		return true;
 	}
 	
 	public void defineLowerPanel() {
@@ -233,6 +243,10 @@ public class AddMemberWindow extends JFrame implements LibWindow {
 		JButton btnAddMember = new JButton("Add Member");
 		attachAddMemberButtonListener(btnAddMember);
 		lowerPanel.add(btnAddMember);
+		
+		JButton btnClear = new JButton("Cancel");
+		btnClear.addActionListener(e -> { clearInput();});
+		lowerPanel.add(btnClear);
 		
 //		JPanel addBookButtonPanel = new JPanel();
 //		addBookButtonPanel.setLayout(new FlowLayout(1));
