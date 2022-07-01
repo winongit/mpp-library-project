@@ -17,9 +17,14 @@ import javax.swing.JPanel;
 
 import business.impl.SystemController;
 import business.usecase.ControllerInterface;
+import dataaccess.Auth;
 import librarysystem.util.Util;
 
 public class LibrarySystem extends JFrame implements LibWindow {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	ControllerInterface ci = new SystemController();
 	public final static LibrarySystem INSTANCE = new LibrarySystem();
 	JPanel mainPanel;
@@ -81,7 +86,7 @@ public class LibrarySystem extends JFrame implements LibWindow {
 	private void addMenuItems() {
 		options = new JMenu("Options");
 		menuBar.add(options);
-		login = new JMenuItem("Login");
+		login = new JMenuItem("Log in");
 		login.addActionListener(new LoginListener());
 		allBookIds = new JMenuItem("All Book Ids");
 		allBookIds.addActionListener(new AllBookIdsListener());
@@ -127,10 +132,15 @@ public class LibrarySystem extends JFrame implements LibWindow {
 	class LoginListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			LibrarySystem.hideAllWindows();
-			LoginWindow.INSTANCE.init();
-			Util.centerFrameOnDesktop(LoginWindow.INSTANCE);
-			LoginWindow.INSTANCE.setVisible(true);
+			if (login.getText().equals("Log in")) {
+				LibrarySystem.hideAllWindows();
+				LoginWindow.INSTANCE.init();
+				Util.centerFrameOnDesktop(LoginWindow.INSTANCE);
+				LoginWindow.INSTANCE.setVisible(true);
+			} else {
+				doLogOut();
+			}
+			
 		}
 
 	}
@@ -221,7 +231,6 @@ public class LibrarySystem extends JFrame implements LibWindow {
 	}
 
 	class AddBookListener implements ActionListener {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			LibrarySystem.hideAllWindows();
@@ -229,7 +238,6 @@ public class LibrarySystem extends JFrame implements LibWindow {
 			AddBookWindow.INSTANCE.pack();
 			Util.centerFrameOnDesktop(AddMemberWindow.INSTANCE);
 			AddBookWindow.INSTANCE.setVisible(true);
-
 		}
 
 	}
@@ -238,7 +246,6 @@ public class LibrarySystem extends JFrame implements LibWindow {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 
@@ -253,6 +260,70 @@ public class LibrarySystem extends JFrame implements LibWindow {
 	public void isInitialized(boolean val) {
 		isInitialized = val;
 
+	}
+	
+	public void doLogOut() {
+		changeLogOutToLogIn();
+		denyAll();
+	}
+	
+	public void changeLogInToLogOut() {
+		this.login.setText("Log out");
+	}
+	
+	public void changeLogOutToLogIn() {
+		this.login.setText("Log in");
+	}
+	
+	
+	public void doAuthentication(Auth auth) {
+		if (auth == Auth.ADMIN) {
+			doAdminAuthentication();
+		} else if (auth == Auth.LIBRARIAN) {
+			doLibrarianAuthentication();
+		} else if (auth == Auth.BOTH) {
+			permitAll();
+		}
+		
+		LibrarySystem.INSTANCE.allBookIds.setVisible(false);
+		LibrarySystem.INSTANCE.allMemberIds.setVisible(false);
+		changeLogInToLogOut();
+	}
+	
+	private void doLibrarianAuthentication() {
+		LibrarySystem.INSTANCE.checkOutBook.setVisible(true);
+		LibrarySystem.INSTANCE.printCheckOutRecord.setVisible(true);
+		
+		LibrarySystem.INSTANCE.addLibraryMember.setVisible(false);
+		LibrarySystem.INSTANCE.addBookCopy.setVisible(false);
+		LibrarySystem.INSTANCE.addBook.setVisible(false);
+	}
+	
+	private void doAdminAuthentication() {
+		LibrarySystem.INSTANCE.checkOutBook.setVisible(false);
+		LibrarySystem.INSTANCE.printCheckOutRecord.setVisible(false);
+		
+		LibrarySystem.INSTANCE.addLibraryMember.setVisible(true);
+		LibrarySystem.INSTANCE.addBookCopy.setVisible(true);
+		LibrarySystem.INSTANCE.addBook.setVisible(true);
+	}
+	
+	private void permitAll() {
+		LibrarySystem.INSTANCE.checkOutBook.setVisible(true);
+		LibrarySystem.INSTANCE.printCheckOutRecord.setVisible(true);
+		
+		LibrarySystem.INSTANCE.addLibraryMember.setVisible(true);
+		LibrarySystem.INSTANCE.addBookCopy.setVisible(true);
+		LibrarySystem.INSTANCE.addBook.setVisible(true);
+	}
+	
+	private void denyAll() {
+		LibrarySystem.INSTANCE.checkOutBook.setVisible(false);
+		LibrarySystem.INSTANCE.printCheckOutRecord.setVisible(false);
+		
+		LibrarySystem.INSTANCE.addLibraryMember.setVisible(false);
+		LibrarySystem.INSTANCE.addBookCopy.setVisible(false);
+		LibrarySystem.INSTANCE.addBook.setVisible(false);
 	}
 
 }
