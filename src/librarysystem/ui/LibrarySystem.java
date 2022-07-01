@@ -31,7 +31,7 @@ public class LibrarySystem extends JFrame implements LibWindow {
 	private boolean isInitialized = false;
 
 	private static LibWindow[] allWindows = { LibrarySystem.INSTANCE, LoginWindow.INSTANCE, AllMemberIdsWindow.INSTANCE,
-			AllBookIdsWindow.INSTANCE };
+			AllBookIdsWindow.INSTANCE, AddMemberWindow.INSTANCE };
 
 	public static void hideAllWindows() {
 
@@ -192,8 +192,10 @@ public class LibrarySystem extends JFrame implements LibWindow {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-
+			LibrarySystem.hideAllWindows();
+			AddMemberWindow.INSTANCE.init();
+			AddMemberWindow.INSTANCE.pack();
+			AddMemberWindow.INSTANCE.setVisible(true);
 		}
 
 	}
