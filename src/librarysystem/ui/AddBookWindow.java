@@ -89,8 +89,11 @@ public class AddBookWindow extends JFrame implements LibWindow {
 		JLabel lblAuthors = new JLabel("Authors");
 		JLabel lblMaxCheckOutLength = new JLabel("Maximum Checkout Length");
 		JLabel lblNumberOfCopies = new JLabel("Book Copies");
-
+		
 		this.txtTitle = new JTextField(10);
+		this.txtISBN = new JTextField(20);
+		this.txtNoOfCopy = new JTextField(10);
+		this.cmbMaxCheckOutLength = new JComboBox<DefaultListModel<String>>();
 
 		leftPanel.add(lblISBN);
 		leftPanel.add(Box.createRigidArea(new Dimension(0, 12)));
