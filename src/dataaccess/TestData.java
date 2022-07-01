@@ -1,5 +1,8 @@
 package dataaccess;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +10,8 @@ import java.util.List;
 import domain.Address;
 import domain.Author;
 import domain.Book;
+import domain.CheckOutRecord;
+import domain.CheckOutRecordEntry;
 import domain.LibraryMember;
 
 /**
@@ -31,6 +36,8 @@ public class TestData {
 		//Added by WinWin
 		td.authorData();
 		
+		td.checkOutRecordData();
+		
 		DataAccess da = new DataAccessFacade();
 		System.out.println(da.readBooksMap());
 		System.out.println(da.readUserMap());
@@ -44,6 +51,7 @@ public class TestData {
 		allBooks.get(2).addCopy();
 		allBooks.get(2).addCopy();
 		DataAccessFacade.loadBookMap(allBooks);
+		
 	}
 	
 	public void userData() {
@@ -54,6 +62,19 @@ public class TestData {
 	public void authorData() {
 		DataAccessFacade.loadAuthorMap(allAuthors);
 	}
+	
+	public void checkOutRecordData() {
+		@SuppressWarnings("serial")
+		LibraryMember libraryMember = new LibraryMember("1001", "Andy", "Rogers", "641-223-2211", addresses.get(4));
+		@SuppressWarnings("serial")
+		CheckOutRecord checkOutRecord = new CheckOutRecord(libraryMember, checkOutRecordEntry);
+				
+		DataAccessFacade.loadCheckOutRecordMap(checkOutRecord);
+	}
+	
+	
+	
+	
 	
 	//create library members
 	public void libraryMemberData() {
@@ -117,5 +138,27 @@ public class TestData {
 			add(new User("102", "abc", Auth.ADMIN));
 			add(new User("103", "111", Auth.BOTH));
 		}
+	};
+	
+	@SuppressWarnings("serial")
+	List<CheckOutRecordEntry> checkOutRecordEntry = new ArrayList<CheckOutRecordEntry>() {
+		{		
+			add(new CheckOutRecordEntry(LocalDate.now(), 
+				LocalDate.now().plusDays(allBooks.get(0).getMaxCheckoutLength())
+				, allBooks.get(0).getCopy(0)));
+			
+			add(new CheckOutRecordEntry(LocalDate.now(), 
+					LocalDate.now().plusDays(allBooks.get(1).getMaxCheckoutLength())
+					, allBooks.get(0).getCopy(0)));
+		}
+	};
+	@SuppressWarnings("serial")
+	List<CheckOutRecord> checkOutRecords = new ArrayList<CheckOutRecord>() {
+		LibraryMember libraryMember = new LibraryMember("1001", "Andy", "Rogers", "641-223-2211", addresses.get(4));
+		CheckOutRecord checkOutRecord = new CheckOutRecord(libraryMember, checkOutRecordEntry);
+		{
+			add(checkOutRecord);
+		}
+		
 	};
 }

@@ -17,7 +17,7 @@ public class LogInController implements LogInUseCase {
 		DataAccess da = new DataAccessFacade();
 		HashMap<String, User> map = da.readUserMap();
 		
-		if (!map.containsKey(id)) {
+		if (!map.containsKey(id)) {	
 			throw new LoginException("Invalid Credentials");
 		}
 		

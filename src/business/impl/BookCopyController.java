@@ -1,21 +1,35 @@
 package business.impl;
 
-import business.usecase.AddBookCopyUseCase;
-import business.usecase.CheckBookCopyAvailableUseCase;
-import domain.Book;
+import java.util.HashMap;
 
-public class BookCopyController implements AddBookCopyUseCase, CheckBookCopyAvailableUseCase{
+import business.usecase.AddBookCopyUseCase;
+import dataaccess.DataAccess;
+import dataaccess.DataAccessFacade;
+import domain.Book;
+import domain.exception.BookNotFoundException;
+
+public class BookCopyController implements AddBookCopyUseCase{
 
 	@Override
-	public void addBookCopy(Book book) {
-		// TODO Auto-generated method stub
+	public Book addBookCopy(Book book, int noOfCopies) throws BookNotFoundException {
+		DataAccess da = new DataAccessFacade();
+		HashMap<String, Book> hmBooks = da.readBooksMap();
+		
+		if (hmBooks.containsKey(book.getIsbn())) {
+			Book bookFromDB = hmBooks.get(book.getIsbn());
+			
+			for(int i=0; i<noOfCopies; i++) {
+				bookFromDB.addCopy();
+			}
+			
+			hmBooks.put(bookFromDB.getIsbn(), bookFromDB);
+			da.updateBookHM(hmBooks);
+			return bookFromDB;
+		} else {
+			throw new BookNotFoundException(book.getIsbn());
+		}
 		
 	}
 
-	@Override
-	public boolean checkBookAvailableCopy(String bookId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 }
