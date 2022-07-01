@@ -59,10 +59,18 @@ public class LoginWindow extends JFrame implements LibWindow {
 
 	public void clear() {
 		messageBar.setText("");
+		this.username.setText("");
+		this.password.setText("");
 	}
 
 	/* This class is a singleton */
 	private LoginWindow() {
+		this.username = new JTextField(10);
+		this.password = new JPasswordField(10);
+	}
+	
+	private void initializeTextBox() {
+		
 	}
 
 	public void init() {
@@ -186,66 +194,35 @@ public class LoginWindow extends JFrame implements LibWindow {
 
 	private void addBackButtonListener(JButton butn) {
 		butn.addActionListener(evt -> {
-			LibrarySystem.hideAllWindows();
-			LibrarySystem.INSTANCE.setVisible(true);
+			backToMain();
 		});
+	}
+	
+	
+ 	
+	private void backToMain() {
+		this.clear();
+		LibrarySystem.hideAllWindows();
+		LibrarySystem.INSTANCE.setVisible(true);
 	}
 
 	private void addLoginButtonListener(JButton butn) {
 		butn.addActionListener(evt -> {
-
-			String user = username.getText();
-			String pass = new String(password.getText());
-			try {
-				Auth auth = logInUseCase.login(user, pass);
-				doAuthentication(auth);
-				JOptionPane.showMessageDialog(this, "Successful Login");
-			} catch (LoginException e) {
-				e.printStackTrace();	
-				JOptionPane.showMessageDialog(this, "Login Failed");
-			}
-
+			doLogIn();
 		});
 	}
 	
-	private void doAuthentication(Auth auth) {
-		if (auth == Auth.ADMIN) {
-			doAdminAuthentication();
-		} else if (auth == Auth.LIBRARIAN) {
-			doLibrarianAuthentication();
-		} else if (auth == Auth.BOTH) {
-			permitAll();
+	private void doLogIn() {
+		String user = this.username.getText();
+		String pass = new String(password.getText());
+		try {
+			Auth auth = logInUseCase.login(user, pass);
+			LibrarySystem.INSTANCE.doAuthentication(auth);
+			//JOptionPane.showMessageDialog(this, "Successful Login");
+			backToMain();
+		} catch (LoginException e) {
+			e.printStackTrace();	
+			JOptionPane.showMessageDialog(this, "Login Failed");
 		}
-		
-		LibrarySystem.INSTANCE.allBookIds.setVisible(false);
-		LibrarySystem.INSTANCE.allMemberIds.setVisible(false);
 	}
-	
-	private void doLibrarianAuthentication() {
-		LibrarySystem.INSTANCE.checkOutBook.setVisible(true);
-		LibrarySystem.INSTANCE.printCheckOutRecord.setVisible(true);
-		
-		LibrarySystem.INSTANCE.addLibraryMember.setVisible(false);
-		LibrarySystem.INSTANCE.addBookCopy.setVisible(false);
-		LibrarySystem.INSTANCE.addBook.setVisible(false);
-	}
-	
-	private void doAdminAuthentication() {
-		LibrarySystem.INSTANCE.checkOutBook.setVisible(false);
-		LibrarySystem.INSTANCE.printCheckOutRecord.setVisible(false);
-		
-		LibrarySystem.INSTANCE.addLibraryMember.setVisible(true);
-		LibrarySystem.INSTANCE.addBookCopy.setVisible(true);
-		LibrarySystem.INSTANCE.addBook.setVisible(true);
-	}
-	
-	private void permitAll() {
-		LibrarySystem.INSTANCE.checkOutBook.setVisible(true);
-		LibrarySystem.INSTANCE.printCheckOutRecord.setVisible(true);
-		
-		LibrarySystem.INSTANCE.addLibraryMember.setVisible(true);
-		LibrarySystem.INSTANCE.addBookCopy.setVisible(true);
-		LibrarySystem.INSTANCE.addBook.setVisible(true);
-	}
-
 }
