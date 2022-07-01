@@ -7,17 +7,19 @@ import java.io.Serializable;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import domain.Author;
 import domain.Book;
+import domain.CheckOutRecord;
 import domain.LibraryMember;
 
 public class DataAccessFacade implements DataAccess {
 
 	enum StorageType {
-		BOOKS, MEMBERS, USERS, AUTHORS;
+		BOOKS, MEMBERS, USERS, AUTHORS, CHECKOUTRECORD;
 	}
 
 	public static final String OUTPUT_DIR = System.getProperty("user.dir") + "/src/dataaccess/storage";
@@ -97,6 +99,18 @@ public class DataAccessFacade implements DataAccess {
 		authorList.forEach(author -> authors.put(author.getAuthorId(),author));
 		saveToStorage(StorageType.AUTHORS, authors);
 	}
+	
+	static void loadCheckOutRecordMap(CheckOutRecord checkOutRecord) {
+		HashMap<String, CheckOutRecord> hmCheckOutRecord = new HashMap<String, CheckOutRecord> ();
+		hmCheckOutRecord.put(checkOutRecord.getMember().getMemberId(), checkOutRecord);
+		
+		List<CheckOutRecord> checkOutRecords = new ArrayList<CheckOutRecord>();
+		checkOutRecords.add(checkOutRecord);
+		
+		saveToStorage(StorageType.CHECKOUTRECORD, hmCheckOutRecord);
+		//saveToStorage(StorageType.CHECKOUTRECORD, checkOutRecords);
+	}
+	
 
 	static void saveToStorage(StorageType type, Object ob) {
 		ObjectOutputStream out = null;
