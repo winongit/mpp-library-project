@@ -26,6 +26,12 @@ public class CheckOutBookController implements CheckOutBookUseCase {
 		if (!checkMember.checkMember(memberId)) {
 			throw new MemberNotFoundException("Member not found");
 		}
+		
+		// save CheckOutRecrodEntry
+
+		// save checkoutrecord -> save to file
+
+		// update book collection
 
 	}
 }

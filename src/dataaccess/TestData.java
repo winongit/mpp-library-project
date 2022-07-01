@@ -25,8 +25,6 @@ import domain.LibraryMember;
  *
  */
 public class TestData {
-	
-	
 	public static void main(String[] args) {
 		TestData td = new TestData();
 		td.bookData();
@@ -66,8 +64,15 @@ public class TestData {
 	public void checkOutRecordData() {
 		@SuppressWarnings("serial")
 		LibraryMember libraryMember = new LibraryMember("1001", "Andy", "Rogers", "641-223-2211", addresses.get(4));
-		@SuppressWarnings("serial")
-		CheckOutRecord checkOutRecord = new CheckOutRecord(libraryMember, checkOutRecordEntry);
+		
+		CheckOutRecordEntry entry = new CheckOutRecordEntry(LocalDate.now(), LocalDate.now(), allBooks.get(0).getCopy(0));
+		CheckOutRecordEntry entry1 = new CheckOutRecordEntry(LocalDate.now(), LocalDate.now(), allBooks.get(0).getCopy(0));
+		
+		List<CheckOutRecordEntry> list = new ArrayList<CheckOutRecordEntry>();
+		list.add(entry);
+		list.add(entry1);
+ 		@SuppressWarnings("serial")
+		CheckOutRecord checkOutRecord = new CheckOutRecord(libraryMember, list);
 				
 		DataAccessFacade.loadCheckOutRecordMap(checkOutRecord);
 	}
@@ -140,25 +145,4 @@ public class TestData {
 		}
 	};
 	
-	@SuppressWarnings("serial")
-	List<CheckOutRecordEntry> checkOutRecordEntry = new ArrayList<CheckOutRecordEntry>() {
-		{		
-			add(new CheckOutRecordEntry(LocalDate.now(), 
-				LocalDate.now().plusDays(allBooks.get(0).getMaxCheckoutLength())
-				, allBooks.get(0).getCopy(0)));
-			
-			add(new CheckOutRecordEntry(LocalDate.now(), 
-					LocalDate.now().plusDays(allBooks.get(1).getMaxCheckoutLength())
-					, allBooks.get(0).getCopy(0)));
-		}
-	};
-	@SuppressWarnings("serial")
-	List<CheckOutRecord> checkOutRecords = new ArrayList<CheckOutRecord>() {
-		LibraryMember libraryMember = new LibraryMember("1001", "Andy", "Rogers", "641-223-2211", addresses.get(4));
-		CheckOutRecord checkOutRecord = new CheckOutRecord(libraryMember, checkOutRecordEntry);
-		{
-			add(checkOutRecord);
-		}
-		
-	};
 }
