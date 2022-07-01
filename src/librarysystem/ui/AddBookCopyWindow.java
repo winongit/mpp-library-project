@@ -1,7 +1,7 @@
 package librarysystem.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.print.Book;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,22 +13,26 @@ import javax.swing.JTextField;
 import business.impl.ControllerFactory;
 import business.usecase.AddBookCopyUseCase;
 import business.usecase.CheckBookCopyAvailableUseCase;
-import business.usecase.CheckOutBookUseCase;
+import domain.Author;
+import domain.Book;
 import domain.exception.BookNotFoundException;
 
 
 
-public class CreateBookCopy extends JFrame {
+public class AddBookCopyWindow extends JFrame implements LibWindow {
 
-	public static final CreateBookCopy INSTANCE = new CreateBookCopy();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static final AddBookCopyWindow INSTANCE = new AddBookCopyWindow();
 	private boolean isInitialized = false;
 	
-	CheckBookCopyAvailableUseCase checkBookCopyAvailableUseCase = ControllerFactory.createCheckBookCopyAvailableUseCase();
 	AddBookCopyUseCase addBookCopyUseCase = ControllerFactory.createAddBookCopyUseCase();
 	
 	private JTextField txtISBN, txtCopyNumber;
 
-	public void addCopy() {
+	public void initComponent() {
 		JPanel panelCreateCopyField = new JPanel();
 		panelCreateCopyField.setLayout(null);
 		JLabel lblISBN = new JLabel("ISBN:");
@@ -64,13 +68,14 @@ public class CreateBookCopy extends JFrame {
 		
 		panelCreateCopyField.add(pnlButtonSave, BorderLayout.CENTER);
 		
+		getContentPane().add(panelCreateCopyField);
 		
 		 this.setTitle("Create Book Copy");
-			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			//this.setLayout(null);
-			this.setSize(430,230);
-			this.setVisible(true);
-			this.add(panelCreateCopyField);
+//			this.setSize(420,220);
+//			this.setVisible(true);
+//			this.add(panelCreateCopyField);
 	}
 
 	private void addBackButtonListener(JButton butn) {
@@ -83,35 +88,49 @@ public class CreateBookCopy extends JFrame {
 	private void addCreateCopyButtonListener(JButton butn) {
 		butn.addActionListener(evt -> {
 			
+			int noOfCopies = 0;
+			
+			try {
+				noOfCopies = Integer.parseInt(txtCopyNumber.getText());
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(this,"Invalid Input","Save Failed", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
+			
 			if(txtISBN.getText().equals("") || txtCopyNumber.getText().equals("")) {
 				JOptionPane.showMessageDialog(this,"Required Fields can not be left empty","Save Failed", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			try {
-				domain.Book book1 = checkBookCopyAvailableUseCase.checkBookAvailableCopy(txtISBN.getText());
-				addBookCopyUseCase.addBookCopy(book1);
+				Book book = new Book(txtISBN.getText(), null, 0, new ArrayList<Author>());
+				
+				book = addBookCopyUseCase.addBookCopy(book, noOfCopies);
+				
+				txtISBN.setText("");
+				txtCopyNumber.setText("");
+				
+				JOptionPane.showMessageDialog(this,"Book copy added successfully, Book " + book.getIsbn() + " has " + book.getNumCopies() + " copies");
 				
 			} catch (BookNotFoundException e) {
 				JOptionPane.showMessageDialog(this,e.getMessage(),"Save Failed", JOptionPane.ERROR_MESSAGE);
 			}
-			
-			txtISBN.setText("");
-			txtCopyNumber.setText(getName());
-			
-			JOptionPane.showMessageDialog(this,"Save successful");	
 		});
 	}
 	
 
 	public boolean isInitialized() {
-		// TODO Auto-generated method stub
-		return false;
+		return isInitialized;
 	}
 
 
 	public void isInitialized(boolean val) {
-		// TODO Auto-generated method stub
-		
+		this.isInitialized = true;
+	}
+
+	@Override
+	public void init() {
+		initComponent();
 	}
 
 }

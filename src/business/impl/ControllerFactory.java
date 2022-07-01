@@ -30,11 +30,6 @@ public class ControllerFactory {
 		return useCase;
 	}
 
-	public static CheckBookCopyAvailableUseCase createCheckBookCopyAvailableUseCase() {
-		CheckBookCopyAvailableUseCase useCase = new BookCopyController();
-		return useCase;
-	}
-
 	public static AddBookCopyUseCase createAddBookCopyUseCase() {
 		AddBookCopyUseCase useCase = new BookCopyController();
 		return useCase;
