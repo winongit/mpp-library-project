@@ -64,6 +64,12 @@ public class DataAccessFacade implements DataAccess {
 		books.put(book.getIsbn(), book);
 		saveToStorage(StorageType.BOOKS, books);
 	}
+	
+	public void updateBookHM(HashMap<String, Book> hmBooks) {
+		saveToStorage(StorageType.BOOKS, hmBooks);
+	}
+	
+	
 
 	///// load methods - these place test data into the storage area
 	///// - used just once at startup

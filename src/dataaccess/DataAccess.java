@@ -13,5 +13,8 @@ public interface DataAccess {
 	public HashMap<String,Author> readAuthorMap(); //Added by WinWin
 	
 	public void saveNewMember(LibraryMember member); 
-	public void saveNewBook(Book book); 	
+	public void saveNewBook(Book book); 
+	public void updateBookHM(HashMap<String, Book> hmBooks);
+	
+	
 }

@@ -1,5 +1,7 @@
 package business.usecase;
 
+import domain.Book;
+
 public interface CheckBookCopyAvailableUseCase {
-	public boolean checkBookAvailableCopy(String bookId); 
+	public Book checkBookAvailableCopy(String bookId); 
 }
