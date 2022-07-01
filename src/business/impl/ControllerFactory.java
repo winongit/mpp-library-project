@@ -7,13 +7,13 @@ import business.usecase.CheckBookCopyAvailableUseCase;
 import business.usecase.CheckMemberUseCase;
 import business.usecase.CheckOutBookUseCase;
 import business.usecase.GetAuthorUseCase;
+import business.usecase.GetBookUseCase;
 import business.usecase.LogInUseCase;
 import business.usecase.SearchBookUseCase;
 
 public class ControllerFactory {
 	private ControllerFactory() {
 	}
-
 	public static SearchBookUseCase createSearchBookUseCase() {
 		SearchBookUseCase useCase = new BookController();
 		return useCase;
@@ -27,6 +27,12 @@ public class ControllerFactory {
 	//Added by WinWin
 	public static GetAuthorUseCase createGetAuthorController() {
 		GetAuthorUseCase useCase = new GetAuthorController();
+		return useCase;
+	}
+	
+	//Added by WinWin
+	public static GetBookUseCase createGetBookUseCase() {
+		GetBookUseCase useCase = new BookController();
 		return useCase;
 	}
 
