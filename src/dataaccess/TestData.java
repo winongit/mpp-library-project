@@ -27,6 +27,10 @@ public class TestData {
 		td.bookData();
 		td.libraryMemberData();
 		td.userData();
+		
+		//Added by WinWin
+		td.authorData();
+		
 		DataAccess da = new DataAccessFacade();
 		System.out.println(da.readBooksMap());
 		System.out.println(da.readUserMap());
@@ -44,6 +48,11 @@ public class TestData {
 	
 	public void userData() {
 		DataAccessFacade.loadUserMap(allUsers);
+	}
+	
+	//Added by WinWin
+	public void authorData() {
+		DataAccessFacade.loadAuthorMap(allAuthors);
 	}
 	
 	//create library members
@@ -78,14 +87,16 @@ public class TestData {
 			add(new Address("501 Central", "Mountain View", "CA", "94707"));
 		}
 	};
+	
+	//Added authorId by WinWin
 	@SuppressWarnings("serial")
 	public List<Author> allAuthors = new ArrayList<Author>() {
 		{
-			add(new Author("Joe", "Thomas", "641-445-2123", addresses.get(0), "A happy man is he."));
-			add(new Author("Sandra", "Thomas", "641-445-2123", addresses.get(0), "A happy wife is she."));
-			add(new Author("Nirmal", "Pugh", "641-919-3223", addresses.get(1), "Thinker of thoughts."));
-			add(new Author("Andrew", "Cleveland", "976-445-2232", addresses.get(2), "Author of childrens' books."));
-			add(new Author("Sarah", "Connor", "123-422-2663", addresses.get(3), "Known for her clever style."));
+			add(new Author("A101","Joe", "Thomas", "641-445-2123", addresses.get(0), "A happy man is he."));
+			add(new Author("A102","Sandra", "Thomas", "641-445-2123", addresses.get(0), "A happy wife is she."));
+			add(new Author("A103","Nirmal", "Pugh", "641-919-3223", addresses.get(1), "Thinker of thoughts."));
+			add(new Author("A104","Andrew", "Cleveland", "976-445-2232", addresses.get(2), "Author of childrens' books."));
+			add(new Author("A105","Sarah", "Connor", "123-422-2663", addresses.get(3), "Known for her clever style."));
 		}
 	};
 	
