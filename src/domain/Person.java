@@ -20,6 +20,11 @@ public class Person implements Serializable {
 	public String getLastName() {
 		return lastName;
 	}
+	
+	//Added by WinWin
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
 	public String getTelephone() {
 		return telephone;
 	}
