@@ -3,7 +3,6 @@ package librarysystem.ui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Box;
@@ -15,16 +14,12 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import business.impl.ControllerFactory;
-import business.impl.GetAuthorController;
 import business.usecase.GetAuthorUseCase;
-import dataaccess.Auth;
 import domain.Author;
-import domain.exception.LoginException;
 import librarysystem.util.JCheckBoxList;
 import librarysystem.util.Util;
 
@@ -42,7 +37,7 @@ public class AddBookWindow extends JFrame implements LibWindow {
 	private DefaultListModel<JCheckBox> model = new DefaultListModel<JCheckBox>();
 	private JCheckBoxList lstAuthors = new JCheckBoxList(model);
 
-	private JComboBox cmbMaxCheckOutLength;
+	private JComboBox<Integer> cmbMaxCheckOutLength;
 
 	// Constructor
 	private AddBookWindow() {
@@ -66,7 +61,7 @@ public class AddBookWindow extends JFrame implements LibWindow {
 
 	public void defineTopPanel() {
 		this.topPanel = new JPanel();
-		JLabel AddBookLabel = new JLabel("Add Book");
+		JLabel AddBookLabel = new JLabel("Add New Book");
 		Util.adjustLabelFont(AddBookLabel, Util.DARK_BLUE, true);
 		this.topPanel.setLayout(new FlowLayout(0));
 		this.topPanel.add(AddBookLabel);
@@ -90,10 +85,13 @@ public class AddBookWindow extends JFrame implements LibWindow {
 		JLabel lblMaxCheckOutLength = new JLabel("Maximum Checkout Length");
 		JLabel lblNumberOfCopies = new JLabel("Book Copies");
 		
-		this.txtTitle = new JTextField(10);
 		this.txtISBN = new JTextField(20);
+		this.txtTitle = new JTextField(10);
 		this.txtNoOfCopy = new JTextField(10);
-		this.cmbMaxCheckOutLength = new JComboBox<DefaultListModel<String>>();
+		
+		this.cmbMaxCheckOutLength = new JComboBox<Integer>();
+		cmbMaxCheckOutLength.addItem(21);
+		cmbMaxCheckOutLength.addItem(7);
 
 		leftPanel.add(lblISBN);
 		leftPanel.add(Box.createRigidArea(new Dimension(0, 12)));
@@ -107,21 +105,22 @@ public class AddBookWindow extends JFrame implements LibWindow {
 
 		// TextField, JList, JCombo
 		rightPanel.add(this.txtISBN);
+		
 		rightPanel.add(Box.createRigidArea(new Dimension(0, 8)));
 		rightPanel.add(this.txtTitle);
+		
 		rightPanel.add(Box.createRigidArea(new Dimension(0, 8)));
-
 		// load authors
 		List<Author> authors = getAllAuthors();
 		authors.forEach(author -> model.addElement(new JCheckBox(author.getFullName())));
-
 		rightPanel.add(this.lstAuthors);
-
+		
 		rightPanel.add(Box.createRigidArea(new Dimension(0, 8)));
-
 		rightPanel.add(this.cmbMaxCheckOutLength);
+		
 		rightPanel.add(Box.createRigidArea(new Dimension(0, 8)));
 		rightPanel.add(this.txtNoOfCopy);
+		
 		middlePanel.add(leftPanel);
 		middlePanel.add(rightPanel);
 		this.outerMiddle.add(middlePanel, "North");
@@ -130,13 +129,14 @@ public class AddBookWindow extends JFrame implements LibWindow {
 		JButton btnBackToMain = new JButton("<< Back to Main");
 		addBackButtonListener(btnBackToMain);
 		
-		JButton addBookButton = new JButton("Add Book");
-		attachAddBookButtonListener(addBookButton);
+		JButton btnAddBook = new JButton("Add Book");
+		attachAddBookButtonListener(btnAddBook);
 		
-		JPanel addBookButtonPanel = new JPanel();
-		addBookButtonPanel.setLayout(new FlowLayout(1));
-		addBookButtonPanel.add(addBookButton);
-		this.outerMiddle.add(addBookButtonPanel, "Center");
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new FlowLayout(1));
+		buttonPanel.add(btnBackToMain);
+		buttonPanel.add(btnAddBook);
+		this.outerMiddle.add(buttonPanel, "Center");
 	}
 
 	private void addBackButtonListener(JButton butn) {
