@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.Box;
@@ -30,8 +31,8 @@ import domain.Book;
 import domain.BookCopy;
 import librarysystem.util.Util;
 
-public class AddBookWindow extends JFrame implements LibWindow {
-	public static final AddBookWindow INSTANCE = new AddBookWindow();
+public class BookWindow extends JFrame implements LibWindow {
+	public static final BookWindow INSTANCE = new BookWindow();
 	private static final long serialVersionUID = 1L;
 	private boolean isInitialized = false;
 
@@ -49,11 +50,7 @@ public class AddBookWindow extends JFrame implements LibWindow {
 	private JComboBox<Integer> cmbMaxCheckOutLength;
 	private JScrollPane jScrollPane;
 	JTable jt;
-
 	DefaultTableModel jtmodel = new DefaultTableModel();
-
-	
-	
 
 	@Override
 	public void init() {
@@ -69,6 +66,10 @@ public class AddBookWindow extends JFrame implements LibWindow {
 	}
 
 	private JScrollPane initializeTable() {
+		//Clear rows and columns
+		jtmodel.setRowCount(0);
+		jtmodel.setColumnCount(0);
+		
 		// jTable
 		jtmodel.addColumn("ISBN");
 		jtmodel.addColumn("Copy Number");
@@ -85,9 +86,9 @@ public class AddBookWindow extends JFrame implements LibWindow {
 		sp.setBounds(310, 20, 375, 340);
 
 		// load books
-		List<Book> dataa = getBookUseCase.getBookCollection();
+		List<Book> data = getBookUseCase.getBookCollection();
 
-		for (Book lm : dataa) {
+		for (Book lm : data) {
 			String isbn = lm.getIsbn();
 			String title = lm.getTitle();
 
@@ -101,7 +102,7 @@ public class AddBookWindow extends JFrame implements LibWindow {
 	}
 
 	// Constructor
-	private AddBookWindow() {
+	private BookWindow() {
 	}
 
 	public JPanel getMainPanel() {
@@ -228,7 +229,11 @@ public class AddBookWindow extends JFrame implements LibWindow {
 				String title = txtTitle.getText().trim();
 				int maxCheckoutPeriod = (int) cmbMaxCheckOutLength.getSelectedItem();
 				List<Author> selectedAuthors = new ArrayList<Author>();
+				
 				int noOfCopy = Integer.valueOf(txtNoOfCopy.getText());
+				
+				//Save data to storage
+				
 				jCheckBoxs.forEach(box -> {
 					List<Author> authors = getAllAuthors();
 
@@ -239,10 +244,18 @@ public class AddBookWindow extends JFrame implements LibWindow {
 					});
 
 				});
+				
+				//WinWin : It's like selecting every authors. Fix it later.
+				for(Author model : selectedAuthors) {
+		            System.out.println(model.getFullName());
+		        }
 
 				Book book = new Book(isbn, title, maxCheckoutPeriod, selectedAuthors);
+				System.out.println("Book : " + book.toString());
 
 				BookCopy bookcopy = new BookCopy(book, noOfCopy, noOfCopy > 0 ? true : false);
+				System.out.println("BookCopy : " + bookcopy.toString());
+				
 				addBookUseCase.addBook(book);
 				book.updateCopies(bookcopy);
 
@@ -252,6 +265,8 @@ public class AddBookWindow extends JFrame implements LibWindow {
 				// load books
 				GetBookUseCase getBookUseCase = ControllerFactory.createGetBookUseCase();
 				List<Book> data = getBookUseCase.getBookCollection();
+				
+				System.out.println("List of book: "+ data.toString());
 
 				for (Book bk : data) {
 					String strISBN = bk.getIsbn();
@@ -279,9 +294,6 @@ public class AddBookWindow extends JFrame implements LibWindow {
 				}
 
 			}
-			// authors.clear();
-			// listModel.clear();
-			// modelBookCopies.clear();
 
 		});
 	}
