@@ -41,9 +41,19 @@ public class LibraryMemberController implements AddLibraryMemberUseCase, CheckMe
 
 	@Override
 	public boolean checkMember(String memberId) {
+		if (getMember(memberId) != null)
+			return true;
+		
+		return false;
+				
+	}
+
+	@Override
+	public LibraryMember getMember(String memberId) {
 		DataAccess da = new DataAccessFacade();
 		HashMap<String,LibraryMember> map = da.readMemberMap();
-		return map.get(memberId) != null;	
+		return map.get(memberId);
 	}
+
 	
 }

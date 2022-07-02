@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.Box;
@@ -30,8 +31,8 @@ import domain.Book;
 import domain.BookCopy;
 import librarysystem.util.Util;
 
-public class AddBookWindow extends JFrame implements LibWindow {
-	public static final AddBookWindow INSTANCE = new AddBookWindow();
+public class BookWindow extends JFrame implements LibWindow {
+	public static final BookWindow INSTANCE = new BookWindow();
 	private static final long serialVersionUID = 1L;
 	private boolean isInitialized = false;
 
@@ -49,11 +50,8 @@ public class AddBookWindow extends JFrame implements LibWindow {
 	private JComboBox<Integer> cmbMaxCheckOutLength;
 	private JScrollPane jScrollPane;
 	JTable jt;
-
 	DefaultTableModel jtmodel = new DefaultTableModel();
-
-	
-	
+	private List<Author> m_authors;
 
 	@Override
 	public void init() {
@@ -66,12 +64,17 @@ public class AddBookWindow extends JFrame implements LibWindow {
 
 		getContentPane().add(mainPanel);
 		isInitialized(true);
+		m_authors = getAllAuthors();
 	}
 
 	private JScrollPane initializeTable() {
+		//Clear rows and columns
+		jtmodel.setRowCount(0);
+		jtmodel.setColumnCount(0);
+		
 		// jTable
 		jtmodel.addColumn("ISBN");
-		jtmodel.addColumn("Copy Number");
+		jtmodel.addColumn("Copy #");
 		jtmodel.addColumn("Book Title");
 		jtmodel.addColumn("Availability");
 
@@ -85,9 +88,9 @@ public class AddBookWindow extends JFrame implements LibWindow {
 		sp.setBounds(310, 20, 375, 340);
 
 		// load books
-		List<Book> dataa = getBookUseCase.getBookCollection();
+		List<Book> data = getBookUseCase.getBookCollection();
 
-		for (Book lm : dataa) {
+		for (Book lm : data) {
 			String isbn = lm.getIsbn();
 			String title = lm.getTitle();
 
@@ -101,7 +104,7 @@ public class AddBookWindow extends JFrame implements LibWindow {
 	}
 
 	// Constructor
-	private AddBookWindow() {
+	private BookWindow() {
 	}
 
 	public JPanel getMainPanel() {
@@ -227,24 +230,36 @@ public class AddBookWindow extends JFrame implements LibWindow {
 				String isbn = txtISBN.getText().trim();
 				String title = txtTitle.getText().trim();
 				int maxCheckoutPeriod = (int) cmbMaxCheckOutLength.getSelectedItem();
+				
 				List<Author> selectedAuthors = new ArrayList<Author>();
+				
 				int noOfCopy = Integer.valueOf(txtNoOfCopy.getText());
+				
+				//Save data to storage
+				
+				
 				jCheckBoxs.forEach(box -> {
-					List<Author> authors = getAllAuthors();
-
-					authors.forEach(auth -> {
-						if (box.getText().equals(auth.getFullName())) {
-							selectedAuthors.add(auth);
+					if (box.isSelected()) {
+						for (Author author : m_authors) {
+							if (box.getText().equals(author.getFullName())) {
+								selectedAuthors.add(author);
+							}
 						}
-					});
+					}
 
 				});
+				
+				for(Author model : selectedAuthors) {
+		            System.out.println(model.getFullName());
+		        }
 
 				Book book = new Book(isbn, title, maxCheckoutPeriod, selectedAuthors);
-
-				BookCopy bookcopy = new BookCopy(book, noOfCopy, noOfCopy > 0 ? true : false);
+				System.out.println("Book : " + book.toString());
+				for (int i=1; i <= noOfCopy; i++) {
+					book.addCopy();
+				}
+				
 				addBookUseCase.addBook(book);
-				book.updateCopies(bookcopy);
 
 				DefaultTableModel model = (DefaultTableModel) jt.getModel();
 				model.setRowCount(0); // clear data
@@ -252,6 +267,12 @@ public class AddBookWindow extends JFrame implements LibWindow {
 				// load books
 				GetBookUseCase getBookUseCase = ControllerFactory.createGetBookUseCase();
 				List<Book> data = getBookUseCase.getBookCollection();
+				
+				System.out.println("List of book: "+ data.toString());
+				
+				if (data != null || data.size() > 0) {
+					model.setRowCount(0);
+				}
 
 				for (Book bk : data) {
 					String strISBN = bk.getIsbn();
@@ -279,9 +300,6 @@ public class AddBookWindow extends JFrame implements LibWindow {
 				}
 
 			}
-			// authors.clear();
-			// listModel.clear();
-			// modelBookCopies.clear();
 
 		});
 	}

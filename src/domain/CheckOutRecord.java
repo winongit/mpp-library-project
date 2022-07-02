@@ -3,7 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.*;
 
-final public class CheckOutRecord implements Serializable{
+public class CheckOutRecord implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private LibraryMember member;
 	private List<CheckOutRecordEntry> checkOutRecordEntries;
@@ -22,6 +22,12 @@ final public class CheckOutRecord implements Serializable{
 
 	public List<CheckOutRecordEntry> getCheckOutRecordEntries() {
 		return checkOutRecordEntries;
+	}
+	
+	public void addCheckOutRecordEntry(CheckOutRecordEntry entry) {
+		if (checkOutRecordEntries  == null)
+			checkOutRecordEntries = new ArrayList<>();
+		this.checkOutRecordEntries.add(entry);
 	}
 
 
