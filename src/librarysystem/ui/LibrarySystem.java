@@ -35,9 +35,15 @@ public class LibrarySystem extends JFrame implements LibWindow {
 	String pathToImage;
 	private boolean isInitialized = false;
 
-	private static LibWindow[] allWindows = { LibrarySystem.INSTANCE, LoginWindow.INSTANCE,
-			AllBookIdsWindow.INSTANCE, AddMemberWindow.INSTANCE, BookWindow.INSTANCE, BookCopyWindow.INSTANCE,
-			CheckoutBookWindow.INSTANCE };
+	private static LibWindow[] allWindows = { 
+			LibrarySystem.INSTANCE, 
+			LoginWindow.INSTANCE,
+			AllBookIdsWindow.INSTANCE, 
+			AddMemberWindow.INSTANCE, 
+			BookWindow.INSTANCE, 
+			BookCopyWindow.INSTANCE,
+			CheckoutBookWindow.INSTANCE,
+			PrintCheckOutRecordWindow.INSTANCE };
 
 	public static void hideAllWindows() {
 
@@ -218,9 +224,13 @@ public class LibrarySystem extends JFrame implements LibWindow {
 	}
 
 	class PrintCheckOutRecordListener implements ActionListener {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			LibrarySystem.hideAllWindows();
+			PrintCheckOutRecordWindow.INSTANCE.init();
+			PrintCheckOutRecordWindow.INSTANCE.pack();
+			Util.centerFrameOnDesktop(PrintCheckOutRecordWindow.INSTANCE);
+			PrintCheckOutRecordWindow.INSTANCE.setVisible(true);
 
 		}
 
