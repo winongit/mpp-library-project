@@ -10,6 +10,10 @@ import dataaccess.User;
 import domain.exception.LoginException;
 
 public class LogInController implements LogInUseCase {
+	LogInController() {
+	}
+	
+	
 	public static Auth currentAuth = null;
 
 	@Override

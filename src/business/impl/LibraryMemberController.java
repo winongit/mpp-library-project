@@ -10,7 +10,9 @@ import domain.LibraryMember;
 import domain.exception.InvalidMemberException;
 
 public class LibraryMemberController implements AddLibraryMemberUseCase, CheckMemberUseCase {
-
+	LibraryMemberController() {
+	}
+	
 	@Override
 	public void addLibraryMember(LibraryMember member) throws InvalidMemberException{
 		DataAccess da = new DataAccessFacade();

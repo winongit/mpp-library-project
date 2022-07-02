@@ -9,6 +9,8 @@ import domain.Book;
 import domain.exception.BookNotFoundException;
 
 public class BookCopyController implements BookCopyUseCase{
+	BookCopyController() {
+	}
 
 	@Override
 	public Book addBookCopy(Book book, int noOfCopies) throws BookNotFoundException {

@@ -10,6 +10,8 @@ import dataaccess.DataAccessFacade;
 import domain.Author;
 
 public class GetAuthorController implements GetAuthorUseCase {
+	GetAuthorController() {
+	}
 
 	@Override
 	public List<Author> getAllAuthors() {

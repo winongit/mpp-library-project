@@ -12,7 +12,7 @@ import domain.Book;
 
 public class BookController implements SearchBookUseCase,AddBookUseCase{
 
-	public BookController(){
+	BookController(){
 	}
 	
 	@Override

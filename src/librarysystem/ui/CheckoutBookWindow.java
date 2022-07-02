@@ -2,31 +2,20 @@ package librarysystem.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Rectangle;
-import java.time.LocalDate;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ListCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import business.impl.BookController;
 import business.impl.ControllerFactory;
-import business.impl.SystemController;
-import business.usecase.BookCopyUseCase;
 import business.usecase.CheckOutBookUseCase;
-import business.usecase.ControllerInterface;
-import business.usecase.SearchBookUseCase;
 import domain.BookCopy;
 import domain.CheckOutRecord;
 import domain.CheckOutRecordEntry;
@@ -144,10 +133,6 @@ public class CheckoutBookWindow extends JFrame implements LibWindow {
 		});
 	}
 
-<<<<<<< HEAD
-=======
-	
->>>>>>> 2069f935bc925bad50c2a813e43ae89ed864716b
 	private void displayCheckoutInfo() {
 		CheckOutRecord cr = checkOutBookUseCase.getCheckOutRecord(txtMemberID.getText());
 		if (cr == null)

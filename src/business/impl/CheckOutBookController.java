@@ -2,7 +2,6 @@ package business.impl;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import business.usecase.CheckMemberUseCase;
@@ -20,9 +19,15 @@ import domain.exception.BookNotFoundException;
 import domain.exception.MemberNotFoundException;
 
 public class CheckOutBookController implements CheckOutBookUseCase {
+	
+	private SearchBookUseCase searchBookUseCase;
+	private CheckMemberUseCase checkMember;
+	
+	CheckOutBookController() {
+		searchBookUseCase = ControllerFactory.createSearchBookUseCase();
+		checkMember = ControllerFactory.createCheckMemberUseCase();
+	}
 
-	private SearchBookUseCase searchBookUseCase = ControllerFactory.createSearchBookUseCase();
-	private CheckMemberUseCase checkMember = ControllerFactory.createCheckMemberUseCase();
 
 	@Override
 	public void checkOutBook(String memberId, String bookId) throws BookNotFoundException, MemberNotFoundException, BooCopyNotAvailableException {

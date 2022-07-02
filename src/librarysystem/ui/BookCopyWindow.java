@@ -12,7 +12,6 @@ import javax.swing.JTextField;
 
 import business.impl.ControllerFactory;
 import business.usecase.BookCopyUseCase;
-import business.usecase.CheckBookCopyAvailableUseCase;
 import domain.Author;
 import domain.Book;
 import domain.exception.BookNotFoundException;

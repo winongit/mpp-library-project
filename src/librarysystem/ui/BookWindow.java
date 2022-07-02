@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -44,7 +43,6 @@ public class BookWindow extends JFrame implements LibWindow {
 
 	private JTextField txtISBN, txtTitle, txtNoOfCopy;
 
-	private DefaultListModel<JCheckBox> model = new DefaultListModel<JCheckBox>();
 	private List<JCheckBox> jCheckBoxs = new ArrayList<>();
 	private JComboBox<Integer> cmbMaxCheckOutLength;
 	private JScrollPane jScrollPane;

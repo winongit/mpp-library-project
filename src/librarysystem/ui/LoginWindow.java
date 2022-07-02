@@ -23,6 +23,11 @@ import domain.exception.LoginException;
 import librarysystem.util.Util;
 
 public class LoginWindow extends JFrame implements LibWindow {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static final LoginWindow INSTANCE = new LoginWindow();
 
 	LogInUseCase logInUseCase = ControllerFactory.createLogInUseCase();
@@ -33,7 +38,6 @@ public class LoginWindow extends JFrame implements LibWindow {
 	private JPanel upperHalf;
 	private JPanel middleHalf;
 	private JPanel lowerHalf;
-	private JPanel container;
 
 	private JPanel topPanel;
 	private JPanel middlePanel;
@@ -45,7 +49,6 @@ public class LoginWindow extends JFrame implements LibWindow {
 	private JTextField password;
 	private JLabel label;
 	private JButton loginButton;
-	private JButton logoutButton;
 
 	public boolean isInitialized() {
 		return isInitialized;
@@ -69,10 +72,6 @@ public class LoginWindow extends JFrame implements LibWindow {
 		this.password = new JPasswordField(10);
 	}
 	
-	private void initializeTextBox() {
-		
-	}
-
 	public void init() {
 		mainPanel = new JPanel();
 		defineUpperHalf();
