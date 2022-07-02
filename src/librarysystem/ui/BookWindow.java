@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.Box;
@@ -25,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 import business.impl.ControllerFactory;
 import business.usecase.AddBookUseCase;
 import business.usecase.GetAuthorUseCase;
-import business.usecase.GetBookUseCase;
+import business.usecase.SearchBookUseCase;
 import domain.Author;
 import domain.Book;
 import domain.BookCopy;
@@ -37,7 +36,7 @@ public class BookWindow extends JFrame implements LibWindow {
 	private boolean isInitialized = false;
 
 	private AddBookUseCase addBookUseCase = ControllerFactory.createAddBookUseCase();
-	private GetBookUseCase getBookUseCase = ControllerFactory.createGetBookUseCase();
+	private SearchBookUseCase searchBookUseCase = ControllerFactory.createSearchBookUseCase();
 
 	private JPanel mainPanel = new JPanel();
 	private JPanel topPanel;
@@ -88,7 +87,7 @@ public class BookWindow extends JFrame implements LibWindow {
 		sp.setBounds(310, 20, 375, 340);
 
 		// load books
-		List<Book> data = getBookUseCase.getBookCollection();
+		List<Book> data = searchBookUseCase.getBookCollection();
 
 		for (Book lm : data) {
 			String isbn = lm.getIsbn();
@@ -265,8 +264,7 @@ public class BookWindow extends JFrame implements LibWindow {
 				model.setRowCount(0); // clear data
 
 				// load books
-				GetBookUseCase getBookUseCase = ControllerFactory.createGetBookUseCase();
-				List<Book> data = getBookUseCase.getBookCollection();
+				List<Book> data = searchBookUseCase.getBookCollection();
 				
 				System.out.println("List of book: "+ data.toString());
 				
@@ -290,7 +288,7 @@ public class BookWindow extends JFrame implements LibWindow {
 			clearData();
 
 			// load books
-			List<Book> dataa = getBookUseCase.getBookCollection();
+			List<Book> dataa = searchBookUseCase.getBookCollection();
 			jtmodel = new  DefaultTableModel();
 			for (Book lm : dataa) {
 				String isbn = lm.getIsbn();

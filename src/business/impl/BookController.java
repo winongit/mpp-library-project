@@ -5,13 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import business.usecase.AddBookUseCase;
-import business.usecase.GetBookUseCase;
 import business.usecase.SearchBookUseCase;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
 import domain.Book;
 
-public class BookController implements SearchBookUseCase,AddBookUseCase,GetBookUseCase{
+public class BookController implements SearchBookUseCase,AddBookUseCase{
 
 	public BookController(){
 	}

@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import business.impl.BookController;
 import business.impl.ControllerFactory;
 import business.impl.SystemController;
+import business.usecase.BookCopyUseCase;
 import business.usecase.CheckOutBookUseCase;
 import business.usecase.ControllerInterface;
 import business.usecase.SearchBookUseCase;
