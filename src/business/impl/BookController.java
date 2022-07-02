@@ -25,7 +25,7 @@ public class BookController implements SearchBookUseCase,AddBookUseCase,GetBookU
 
 	@Override
 	public void addBook(Book book) { 
-		if(searchBook(book.getIsbn()) != null) {
+		if(searchBook(book.getIsbn()) == null) {
 			DataAccess da = new DataAccessFacade();
 			da.saveNewBook(book);	
 		}
