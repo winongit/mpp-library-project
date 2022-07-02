@@ -141,45 +141,6 @@ public class CheckoutBookWindow extends JFrame implements LibWindow {
 		});
 	}
 
-	private void addCheckoutBtnListener(JButton butn) {
-		butn.addActionListener(evt -> {
-
-			BookCopy bookCopy = (BookCopy) cmbCopies.getSelectedItem();
-
-			if (bookCopy == null) {
-				JOptionPane.showMessageDialog(this, "Pls select a book from the list.", "Save Failed",
-						JOptionPane.ERROR_MESSAGE);
-
-				return;
-			} else if (!bookCopy.isAvailable()) {
-				JOptionPane.showMessageDialog(this, "Selected book is not available.", "Save Failed",
-						JOptionPane.ERROR_MESSAGE);
-				return;
-			} else if (!idWasValidated) {
-				JOptionPane.showMessageDialog(this, "Enter valid ID then click CheckID.", "Save Failed",
-						JOptionPane.ERROR_MESSAGE);
-				return;
-			}
-			CheckOutBookUseCase checkOutBook = ControllerFactory.createCheckOutBookUseCase();
-
-			JOptionPane.showMessageDialog(this, "Save successful");
-
-			DefaultTableModel modell = (DefaultTableModel) jt.getModel();
-			BookCopy bc = (BookCopy) cmbCopies.getSelectedItem();
-			modell.addRow(new Object[] { txtMemberID.getText().trim(), LocalDate.now(),
-					LocalDate.now().plusDays(bc.getBook().getMaxCheckoutLength()) });
-
-			jt.setRowSelectionInterval(modell.getRowCount() - 1, modell.getRowCount() - 1);
-			jt.scrollRectToVisible(new Rectangle(jt.getCellRect(modell.getRowCount() - 1, 0, true)));
-
-			txtISBN.setText("");
-			txtMemberID.setText("");
-			cmbCopies.removeAllItems();
-			idWasValidated = false;
-
-		});
-	}
-
 	private void displayCheckoutInfo() {
 		CheckOutRecord cr = checkOutBookUseCase.getCheckOutRecord(txtMemberID.getText());
 		if (cr == null)
