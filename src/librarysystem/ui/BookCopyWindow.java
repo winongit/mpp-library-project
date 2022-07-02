@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import business.impl.ControllerFactory;
-import business.usecase.AddBookCopyUseCase;
+import business.usecase.BookCopyUseCase;
 import business.usecase.CheckBookCopyAvailableUseCase;
 import domain.Author;
 import domain.Book;
@@ -19,16 +19,16 @@ import domain.exception.BookNotFoundException;
 
 
 
-public class AddBookCopyWindow extends JFrame implements LibWindow {
+public class BookCopyWindow extends JFrame implements LibWindow {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final AddBookCopyWindow INSTANCE = new AddBookCopyWindow();
+	public static final BookCopyWindow INSTANCE = new BookCopyWindow();
 	private boolean isInitialized = false;
 	
-	AddBookCopyUseCase addBookCopyUseCase = ControllerFactory.createAddBookCopyUseCase();
+	BookCopyUseCase addBookCopyUseCase = ControllerFactory.createBookCopyUseCase();
 	
 	private JTextField txtISBN, txtCopyNumber;
 
@@ -58,7 +58,7 @@ public class AddBookCopyWindow extends JFrame implements LibWindow {
 		pnlButtonSave.add(btnBacktoMain);
 		pnlButtonSave.add(btnSave);
 		pnlButtonSave.setBounds(20, 100, 360, 35);
-		pnlButtonSave.setBackground(Color.green);
+		pnlButtonSave.setBackground(Color.white);
 		
 		panelCreateCopyField.add(lblISBN);
 		panelCreateCopyField.add(txtISBN);
@@ -72,10 +72,6 @@ public class AddBookCopyWindow extends JFrame implements LibWindow {
 		
 		 this.setTitle("Create Book Copy");
 		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			//this.setLayout(null);
-//			this.setSize(420,220);
-//			this.setVisible(true);
-//			this.add(panelCreateCopyField);
 	}
 
 	private void addBackButtonListener(JButton butn) {

@@ -36,7 +36,7 @@ public class LibrarySystem extends JFrame implements LibWindow {
 	private boolean isInitialized = false;
 
 	private static LibWindow[] allWindows = { LibrarySystem.INSTANCE, LoginWindow.INSTANCE, AllMemberIdsWindow.INSTANCE,
-			AllBookIdsWindow.INSTANCE, AddMemberWindow.INSTANCE, BookWindow.INSTANCE, AddBookCopyWindow.INSTANCE,
+			AllBookIdsWindow.INSTANCE, AddMemberWindow.INSTANCE, BookWindow.INSTANCE, BookCopyWindow.INSTANCE,
 			CheckoutBookWindow.INSTANCE };
 
 	public static void hideAllWindows() {
@@ -69,7 +69,7 @@ public class LibrarySystem extends JFrame implements LibWindow {
 
 	private void setPathToImage() {
 		String currDirectory = System.getProperty("user.dir");
-		pathToImage = currDirectory + "\\src\\librarysystem\\library.jpg";
+		pathToImage = currDirectory + "/src/librarysystem/library.jpg";
 	}
 
 	private void insertSplashImage() {
@@ -230,10 +230,10 @@ public class LibrarySystem extends JFrame implements LibWindow {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			LibrarySystem.hideAllWindows();
-			AddBookCopyWindow.INSTANCE.init();
-			AddBookCopyWindow.INSTANCE.pack();
-			Util.centerFrameOnDesktop(AddBookCopyWindow.INSTANCE);
-			AddBookCopyWindow.INSTANCE.setVisible(true);
+			BookCopyWindow.INSTANCE.init();
+			BookCopyWindow.INSTANCE.pack();
+			Util.centerFrameOnDesktop(BookCopyWindow.INSTANCE);
+			BookCopyWindow.INSTANCE.setVisible(true);
 
 		}
 

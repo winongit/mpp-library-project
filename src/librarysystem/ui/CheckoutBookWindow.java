@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import business.impl.BookController;
 import business.impl.ControllerFactory;
 import business.impl.SystemController;
-import business.usecase.AddBookCopyUseCase;
+import business.usecase.BookCopyUseCase;
 import business.usecase.CheckOutBookUseCase;
 import business.usecase.ControllerInterface;
 import business.usecase.SearchBookUseCase;
@@ -47,17 +47,20 @@ public class CheckoutBookWindow extends JFrame implements LibWindow {
 
 	CheckOutBookUseCase checkOutBookUseCase = ControllerFactory.createCheckOutBookUseCase();
 	private boolean isInitialized = false;
+	JFrame frame = new JFrame();
+	
 
 	JTextField txtISBN, txtMemberID;
 	JComboBox<BookCopy> cmbCopies;
 	JTable jt;
-	private boolean idWasValidated = false;
+	//private boolean idWasValidated = false;
 
 	public void checkOutBook() {
 		// TODO Auto-generated method stub
 
 		JPanel panelCheckoutFields = new JPanel();
 		panelCheckoutFields.setLayout(null);
+		panelCheckoutFields.setSize(getPreferredSize());
 
 		this.setTitle("Checkout Book");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,7 +76,7 @@ public class CheckoutBookWindow extends JFrame implements LibWindow {
 
 		JButton btnCheckout = new JButton("Checkout");
 		btnCheckout.setBounds(110, 80, 100, 20);
-		addCheckIDListener(btnCheckout);
+		addCheckoutListener(btnCheckout);
 
 		JButton btnBackToMain = new JButton("Back to Main");
 		addBackButtonListener(btnBackToMain);
@@ -81,7 +84,7 @@ public class CheckoutBookWindow extends JFrame implements LibWindow {
 		JPanel pnlButtonSave = new JPanel();
 		pnlButtonSave.add(btnBackToMain);
 		pnlButtonSave.setBounds(20, 150, 800, 35);
-		pnlButtonSave.setBackground(Color.gray);
+		pnlButtonSave.setBackground(Color.white);
 
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("Member Id");
@@ -97,8 +100,6 @@ public class CheckoutBookWindow extends JFrame implements LibWindow {
 		sp.setBounds(20, 200, 800, 150);
 		panelCheckoutFields.add(sp);
 
-		// Print CheckoutRecord
-
 		panelCheckoutFields.add(lblMemberID);
 		panelCheckoutFields.add(txtISBN);
 
@@ -110,22 +111,24 @@ public class CheckoutBookWindow extends JFrame implements LibWindow {
 
 		this.setSize(450, 450);
 		this.setVisible(true);
+		this.setResizable(true);
 		this.add(panelCheckoutFields);
+		
 
 	}
 
-	private void addCheckIDListener(JButton butn) {
+	private void addCheckoutListener(JButton butn) {
 		butn.addActionListener(evt -> {
 			String bkISBN = txtISBN.getText().trim();
 			String memberID = txtMemberID.getText().trim();
 
 			if (bkISBN.length() == 0 || memberID.length() == 0) {
-				JOptionPane.showMessageDialog(this, "ISBN and member ID required", "Save Failed",
+				JOptionPane.showMessageDialog(this, "ISBN and member ID required", "Checkout Failed",
 						JOptionPane.ERROR_MESSAGE);
 			} else {
 					try {
 						checkOutBookUseCase.checkOutBook(memberID, bkISBN);
-						JOptionPane.showMessageDialog(this, "Checkout successful", "Thank you", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(this, "Checkout successful", "Thank you", JOptionPane.PLAIN_MESSAGE);
 						displayCheckoutInfo();
 					} catch (BookNotFoundException | MemberNotFoundException | BooCopyNotAvailableException e) {
 						JOptionPane.showMessageDialog(this, e.getMessage(), "Check out book", JOptionPane.ERROR_MESSAGE);
@@ -141,45 +144,10 @@ public class CheckoutBookWindow extends JFrame implements LibWindow {
 		});
 	}
 
-	private void addCheckoutBtnListener(JButton butn) {
-		butn.addActionListener(evt -> {
-
-			BookCopy bookCopy = (BookCopy) cmbCopies.getSelectedItem();
-
-			if (bookCopy == null) {
-				JOptionPane.showMessageDialog(this, "Pls select a book from the list.", "Save Failed",
-						JOptionPane.ERROR_MESSAGE);
-
-				return;
-			} else if (!bookCopy.isAvailable()) {
-				JOptionPane.showMessageDialog(this, "Selected book is not available.", "Save Failed",
-						JOptionPane.ERROR_MESSAGE);
-				return;
-			} else if (!idWasValidated) {
-				JOptionPane.showMessageDialog(this, "Enter valid ID then click CheckID.", "Save Failed",
-						JOptionPane.ERROR_MESSAGE);
-				return;
-			}
-			CheckOutBookUseCase checkOutBook = ControllerFactory.createCheckOutBookUseCase();
-
-			JOptionPane.showMessageDialog(this, "Save successful");
-
-			DefaultTableModel modell = (DefaultTableModel) jt.getModel();
-			BookCopy bc = (BookCopy) cmbCopies.getSelectedItem();
-			modell.addRow(new Object[] { txtMemberID.getText().trim(), LocalDate.now(),
-					LocalDate.now().plusDays(bc.getBook().getMaxCheckoutLength()) });
-
-			jt.setRowSelectionInterval(modell.getRowCount() - 1, modell.getRowCount() - 1);
-			jt.scrollRectToVisible(new Rectangle(jt.getCellRect(modell.getRowCount() - 1, 0, true)));
-
-			txtISBN.setText("");
-			txtMemberID.setText("");
-			cmbCopies.removeAllItems();
-			idWasValidated = false;
-
-		});
-	}
-
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 2069f935bc925bad50c2a813e43ae89ed864716b
 	private void displayCheckoutInfo() {
 		CheckOutRecord cr = checkOutBookUseCase.getCheckOutRecord(txtMemberID.getText());
 		if (cr == null)

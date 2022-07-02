@@ -2,13 +2,13 @@ package business.impl;
 
 import java.util.HashMap;
 
-import business.usecase.AddBookCopyUseCase;
+import business.usecase.BookCopyUseCase;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
 import domain.Book;
 import domain.exception.BookNotFoundException;
 
-public class BookCopyController implements AddBookCopyUseCase{
+public class BookCopyController implements BookCopyUseCase{
 
 	@Override
 	public Book addBookCopy(Book book, int noOfCopies) throws BookNotFoundException {
