@@ -58,7 +58,7 @@ public class BookCopyWindow extends JFrame implements LibWindow {
 		pnlButtonSave.add(btnBacktoMain);
 		pnlButtonSave.add(btnSave);
 		pnlButtonSave.setBounds(20, 100, 360, 35);
-		pnlButtonSave.setBackground(Color.green);
+		pnlButtonSave.setBackground(Color.white);
 		
 		panelCreateCopyField.add(lblISBN);
 		panelCreateCopyField.add(txtISBN);
@@ -72,10 +72,6 @@ public class BookCopyWindow extends JFrame implements LibWindow {
 		
 		 this.setTitle("Create Book Copy");
 		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			//this.setLayout(null);
-//			this.setSize(420,220);
-//			this.setVisible(true);
-//			this.add(panelCreateCopyField);
 	}
 
 	private void addBackButtonListener(JButton butn) {
