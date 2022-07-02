@@ -1,9 +1,20 @@
 package business.impl;
 
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.HashMap;
+
 import business.usecase.CheckMemberUseCase;
 import business.usecase.CheckOutBookUseCase;
 import business.usecase.SearchBookUseCase;
+import dataaccess.DataAccess;
+import dataaccess.DataAccessFacade;
 import domain.Book;
+import domain.BookCopy;
+import domain.CheckOutRecord;
+import domain.CheckOutRecordEntry;
+import domain.LibraryMember;
+import domain.exception.BooCopyNotAvailableException;
 import domain.exception.BookNotFoundException;
 import domain.exception.MemberNotFoundException;
 
@@ -13,13 +24,12 @@ public class CheckOutBookController implements CheckOutBookUseCase {
 	private CheckMemberUseCase checkMember = ControllerFactory.createCheckMemberUseCase();
 
 	@Override
-	public void checkOutBook(String memberId, String bookId) throws BookNotFoundException, MemberNotFoundException {
-		// TODO Auto-generated method stub
+	public void checkOutBook(String memberId, String bookId) throws BookNotFoundException, MemberNotFoundException, BooCopyNotAvailableException {
+		DataAccess da = new DataAccessFacade();
 
 		Book book = searchBookUseCase.searchBook(bookId);
 
 		if (book == null) {
-			System.out.println(bookId);
 			throw new BookNotFoundException("Book not found");
 		}
 
@@ -27,11 +37,44 @@ public class CheckOutBookController implements CheckOutBookUseCase {
 			throw new MemberNotFoundException("Member not found");
 		}
 		
-		// save CheckOutRecrodEntry
+		LibraryMember member = checkMember.getMember(memberId);
+		
+		
+		// Check Book Available
+	 	BookCopy bookCopy = book.getNextAvailableCopy();
+	 	
+	 	if(bookCopy == null) {
+	 		throw new BooCopyNotAvailableException(book.getIsbn());
+	 	}
+	 	
+	 	bookCopy.changeAvailability();
+	 	
+	 	LocalDate dueDate = LocalDate.now().plusDays(bookCopy.getBook().getMaxCheckoutLength());
+	 	LocalDate checkOutDate = LocalDate.now();
+	 	CheckOutRecordEntry checkOutEntry = new CheckOutRecordEntry(dueDate, checkOutDate, bookCopy);
 
-		// save checkoutrecord -> save to file
-
+	 	HashMap<String, CheckOutRecord> hmCheckOutRecord = da.readCheckOutRecordsMap();
+	 	
+	 	CheckOutRecord checkOutRecord = null;
+	 	
+	 	if(hmCheckOutRecord.get(member.getMemberId()) != null) {
+	 		checkOutRecord = hmCheckOutRecord.get(member.getMemberId());
+	 		checkOutRecord.getCheckOutRecordEntries().add(checkOutEntry);
+	 	} else {
+	 		checkOutRecord = new CheckOutRecord(member, Arrays.asList(checkOutEntry));
+	 	}
+	 	
+	 	// save checkoutrecord -> save to file
+	 	hmCheckOutRecord.put(member.getMemberId(), checkOutRecord);
+		da.saveCheckOutRecord(hmCheckOutRecord);
+		
 		// update book collection
-
+		book.updateCopies(bookCopy);
+		
+		HashMap<String, Book> hmBooks = da.readBooksMap();
+		Book bookFromDB = hmBooks.get(book.getIsbn());
+		
+		hmBooks.put(bookFromDB.getIsbn(), book);
+		da.updateBookHM(hmBooks);
 	}
 }

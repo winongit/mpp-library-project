@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import business.impl.BookController;
 import business.impl.ControllerFactory;
 import business.impl.SystemController;
+import business.usecase.AddBookCopyUseCase;
 import business.usecase.CheckOutBookUseCase;
 import business.usecase.ControllerInterface;
 import business.usecase.SearchBookUseCase;
@@ -95,7 +96,7 @@ public class CheckoutBookWindow extends JFrame implements LibWindow {
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("Copy No");
 		model.addColumn("Member");
-		model.addColumn("Issue Date");
+		model.addColumn("Checkout Date");
 		model.addColumn("Due Date");
 
 		jt = new JTable(model);
@@ -129,14 +130,22 @@ public class CheckoutBookWindow extends JFrame implements LibWindow {
 
 	private void addCheckIDListener(JButton butn) {
 		butn.addActionListener(evt -> {
-			try {
-				checkOutBookUseCase.checkOutBook(txtMemberID.getText(), txtISBN.getText());
-			} catch (BookNotFoundException e) {
-				JOptionPane.showMessageDialog(this,e.getMessage(), "Checkout Book", JOptionPane.ERROR_MESSAGE);
-				
-			} catch (MemberNotFoundException e) {
-				JOptionPane.showMessageDialog(this,e.getMessage(), "Checkout Book", JOptionPane.ERROR_MESSAGE);
-			}
+			String bkISBN = txtISBN.getText().trim();
+            String memberID = txtMemberID.getText().trim();
+
+            if (bkISBN.length() == 0 || memberID.length() == 0) {
+            	JOptionPane.showMessageDialog(this, "ISBN and member ID required", "Save Failed",
+						JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+                	checkOutBookUseCase.checkOutBook(memberID, bkISBN);
+                	JOptionPane.showMessageDialog(this, "Checkout successful", "Thank you",
+    						JOptionPane.ERROR_MESSAGE);
+
+                } catch (Exception e) {
+                   
+                }
+            }
 		});
 	}
 
@@ -166,6 +175,10 @@ public class CheckoutBookWindow extends JFrame implements LibWindow {
 						JOptionPane.ERROR_MESSAGE);
 				return;
 			}
+			CheckOutBookUseCase checkOutBook = ControllerFactory.createCheckOutBookUseCase();
+			
+			
+			
 
 			JOptionPane.showMessageDialog(this, "Save successful");
 

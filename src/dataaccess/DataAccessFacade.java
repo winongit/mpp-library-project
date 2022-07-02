@@ -186,4 +186,15 @@ public class DataAccessFacade implements DataAccess {
 		private static final long serialVersionUID = 5399827794066637059L;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public HashMap<String, CheckOutRecord> readCheckOutRecordsMap() {
+		return (HashMap<String, CheckOutRecord>) readFromStorage(StorageType.CHECKOUTRECORD);
+	}
+
+	@Override
+	public void saveCheckOutRecord(HashMap<String, CheckOutRecord> hmCheckOutRecords) {
+		saveToStorage(StorageType.CHECKOUTRECORD, hmCheckOutRecords);
+	}
+
 }

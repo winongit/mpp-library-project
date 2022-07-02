@@ -3,7 +3,6 @@ package business.impl;
 import business.usecase.AddBookCopyUseCase;
 import business.usecase.AddBookUseCase;
 import business.usecase.AddLibraryMemberUseCase;
-import business.usecase.CheckBookCopyAvailableUseCase;
 import business.usecase.CheckMemberUseCase;
 import business.usecase.CheckOutBookUseCase;
 import business.usecase.GetAuthorUseCase;
