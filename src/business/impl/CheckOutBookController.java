@@ -1,6 +1,7 @@
 package business.impl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -59,9 +60,13 @@ public class CheckOutBookController implements CheckOutBookUseCase {
 	 	
 	 	if(hmCheckOutRecord.get(member.getMemberId()) != null) {
 	 		checkOutRecord = hmCheckOutRecord.get(member.getMemberId());
-	 		checkOutRecord.getCheckOutRecordEntries().add(checkOutEntry);
+	 		
+	 		checkOutRecord.addCheckOutRecordEntry(checkOutEntry);
 	 	} else {
-	 		checkOutRecord = new CheckOutRecord(member, Arrays.asList(checkOutEntry));
+
+	 		ArrayList<CheckOutRecordEntry> list = new ArrayList<>();
+	 		list.add(checkOutEntry);
+	 		checkOutRecord = new CheckOutRecord(member, list);
 	 	}
 	 	
 	 	// save checkoutrecord -> save to file
@@ -76,5 +81,14 @@ public class CheckOutBookController implements CheckOutBookUseCase {
 		
 		hmBooks.put(bookFromDB.getIsbn(), book);
 		da.updateBookHM(hmBooks);
+	}
+
+	@Override
+	public CheckOutRecord getCheckOutRecord(String memberId) {
+		DataAccess da = new DataAccessFacade();
+		HashMap<String, CheckOutRecord> hmCheckOutRecord = da.readCheckOutRecordsMap();
+	 	 	
+	 	return hmCheckOutRecord.get(memberId); 
+	 		
 	}
 }
