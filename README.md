@@ -24,8 +24,6 @@ This is the library system implementation for MPP Project
 ##### 2. Add Library Member Use Case
 Admin can add new member and new book to the system, but can not check out book. If the user is both admin and
 librarian he/she can also check out. 
-If you want to be librarian you should submit with ID: member and password: 123456
-he can check out books.
 
 ##### 3. Checkout Book Use Case
 Librarian can check out books if he enters the member ID and ISBN number correctly, otherwise system presents error.
@@ -48,13 +46,29 @@ When user logins as a Librarian he can print the checkout record for a particula
 
 ## Design
 ##### Use Case Diagram
-<img src="./docs/Library-UseCases.png" alt="Library Use Cases"/>
+<img src="./docs/Library-UseCases.png" alt="Library Use Cases" width="800" height="400"/>
 
 ##### Domain Class Diagram
-<img src="./docs/DomainClasses.png" alt="Library Use Cases"/>
+Below image is the domain object model for library system.
+<br/>
+<img src="./docs/DomainClasses.png" alt="Domain object model"  width="800" height="400"/>
 
-##### Operational Class Diagram
+##### Overall Class Diagram
+Below image is the overall class diagram for library system. This is more on flow connecting with the UI, Controller and Data Access.
+<br/>
+<img src="./docs/OperationClassDiagram.png" alt="Overall"  width="800" height="500"/>
 
-##### Sequence Diagram
+##### Sequence Diagram - Log In Use Case
+<img src="./docs/LogInSeqenceDiagram.png" alt="Log In Sequence Diagram" width="800" height="300"/>
 
+##### Sequence Diagram - Add Library Member Use Case
+<img src="./docs/AddLibraryMemberSequenceDiagram.png" alt="Add Library Member Sequence Diagram" width="800" height="300"/>
 
+##### Sequence Diagram - Checkout Book Use Case
+<img src="./docs/CheckOutBookSequenceDiagram.png" alt="Checkout Book Sequence Diagram" width="800" height="600"/>
+
+##### Sequence Diagram - Book Copy Use Case
+<img src="./docs/AddBookCopy.png" alt="Book Copy Sequence Diagram" width="800" height="300"/>
+
+##### Sequence Diagram - Add Book Use Case
+<img src="./docs/AddNewBook.png" alt="Book Copy Sequence Diagram" width="800" height="300"/>

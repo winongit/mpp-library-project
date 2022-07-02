@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import business.impl.ControllerFactory;
-import business.usecase.AddBookCopyUseCase;
+import business.usecase.BookCopyUseCase;
 import business.usecase.CheckBookCopyAvailableUseCase;
 import domain.Author;
 import domain.Book;
@@ -19,16 +19,16 @@ import domain.exception.BookNotFoundException;
 
 
 
-public class AddBookCopyWindow extends JFrame implements LibWindow {
+public class BookCopyWindow extends JFrame implements LibWindow {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final AddBookCopyWindow INSTANCE = new AddBookCopyWindow();
+	public static final BookCopyWindow INSTANCE = new BookCopyWindow();
 	private boolean isInitialized = false;
 	
-	AddBookCopyUseCase addBookCopyUseCase = ControllerFactory.createAddBookCopyUseCase();
+	BookCopyUseCase addBookCopyUseCase = ControllerFactory.createBookCopyUseCase();
 	
 	private JTextField txtISBN, txtCopyNumber;
 

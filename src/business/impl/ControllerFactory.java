@@ -1,12 +1,11 @@
 package business.impl;
 
-import business.usecase.AddBookCopyUseCase;
 import business.usecase.AddBookUseCase;
 import business.usecase.AddLibraryMemberUseCase;
+import business.usecase.BookCopyUseCase;
 import business.usecase.CheckMemberUseCase;
 import business.usecase.CheckOutBookUseCase;
 import business.usecase.GetAuthorUseCase;
-import business.usecase.GetBookUseCase;
 import business.usecase.LogInUseCase;
 import business.usecase.SearchBookUseCase;
 
@@ -29,14 +28,9 @@ public class ControllerFactory {
 		return useCase;
 	}
 	
-	//Added by WinWin
-	public static GetBookUseCase createGetBookUseCase() {
-		GetBookUseCase useCase = new BookController();
-		return useCase;
-	}
 
-	public static AddBookCopyUseCase createAddBookCopyUseCase() {
-		AddBookCopyUseCase useCase = new BookCopyController();
+	public static BookCopyUseCase createBookCopyUseCase() {
+		BookCopyUseCase useCase = new BookCopyController();
 		return useCase;
 	}
 
