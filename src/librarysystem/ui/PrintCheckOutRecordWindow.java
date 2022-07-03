@@ -2,11 +2,9 @@ package librarysystem.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Rectangle;
-import java.time.LocalDate;
+import java.awt.Dimension;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,15 +16,11 @@ import javax.swing.table.DefaultTableModel;
 
 import business.impl.ControllerFactory;
 import business.usecase.CheckOutBookUseCase;
-import domain.BookCopy;
 import domain.CheckOutRecord;
 import domain.CheckOutRecordEntry;
 
 public class PrintCheckOutRecordWindow extends JFrame implements LibWindow {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public static final PrintCheckOutRecordWindow INSTANCE = new PrintCheckOutRecordWindow();
 
@@ -39,14 +33,13 @@ public class PrintCheckOutRecordWindow extends JFrame implements LibWindow {
 	JTextField txtMemberID;
 	JTable jt;
 	
-	private boolean idWasValidated = false;
-
 	public void checkOutBook() {
-
 		JPanel panelCheckoutFields = new JPanel();
 		panelCheckoutFields.setLayout(null);
+		panelCheckoutFields.setSize(500,500);
 
 		this.setTitle("Print Checkout Records");
+		this.setMinimumSize(new Dimension(850, 600));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JLabel lblMemberID = new JLabel("Member ID");
@@ -58,13 +51,14 @@ public class PrintCheckOutRecordWindow extends JFrame implements LibWindow {
 		btnSearch.setBounds(110, 80, 100, 20);
 		addCheckIDListener(btnSearch);
 
-		JButton btnBackToMain = new JButton("Back to Main");
+		JButton btnBackToMain = new JButton("<< Back to Main");
 		addBackButtonListener(btnBackToMain);
 
-		JPanel pnlButtonSave = new JPanel();
-		pnlButtonSave.add(btnBackToMain);
-		pnlButtonSave.setBounds(20, 150, 800, 35);
-		pnlButtonSave.setBackground(Color.gray);
+		JPanel pnlButtons = new JPanel();
+		pnlButtons.add(btnBackToMain);
+		pnlButtons.add(btnSearch);
+		pnlButtons.setBounds(20, 150, 800, 35);
+		//pnlButtons.setBackground(Color.gray);
 
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("Member Id");
@@ -85,8 +79,7 @@ public class PrintCheckOutRecordWindow extends JFrame implements LibWindow {
 		panelCheckoutFields.add(lblMemberID);
 		panelCheckoutFields.add(txtMemberID);
 
-		panelCheckoutFields.add(btnSearch);
-		panelCheckoutFields.add(pnlButtonSave, BorderLayout.CENTER);
+		panelCheckoutFields.add(pnlButtons, BorderLayout.CENTER);
 
 		this.setSize(450, 450);
 		this.setVisible(true);
@@ -117,32 +110,7 @@ public class PrintCheckOutRecordWindow extends JFrame implements LibWindow {
 			LibrarySystem.INSTANCE.setVisible(true);
 		});
 	}
-
-//	private void addCheckoutBtnListener(JButton butn) {
-//		butn.addActionListener(evt -> {
-//
-//			if (!idWasValidated) {
-//				JOptionPane.showMessageDialog(this, "Enter valid ID then click search again.", "Search Failed",
-//						JOptionPane.ERROR_MESSAGE);
-//				return;
-//			}
-//			CheckOutBookUseCase checkOutBook = ControllerFactory.createCheckOutBookUseCase();
-//
-//			DefaultTableModel modell = (DefaultTableModel) jt.getModel();
-//			//BookCopy bc = (BookCopy) cmbCopies.getSelectedItem();
-//			modell.addRow(new Object[] { txtMemberID.getText().trim(), LocalDate.now(),
-//					LocalDate.now().plusDays(bc.getBook().getMaxCheckoutLength()) });
-//
-//			jt.setRowSelectionInterval(modell.getRowCount() - 1, modell.getRowCount() - 1);
-//			jt.scrollRectToVisible(new Rectangle(jt.getCellRect(modell.getRowCount() - 1, 0, true)));
-//
-//			txtMemberID.setText("");
-//			cmbCopies.removeAllItems();
-//			idWasValidated = false;
-//
-//		});
-//	}
-
+	
 	private void displayCheckoutInfo() {
 		CheckOutRecord cr = checkOutBookUseCase.getCheckOutRecord(txtMemberID.getText());
 		if (cr == null)

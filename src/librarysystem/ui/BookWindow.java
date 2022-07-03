@@ -71,7 +71,7 @@ public class BookWindow extends JFrame implements LibWindow {
 		
 		// jTable
 		jtmodel.addColumn("ISBN");
-		jtmodel.addColumn("Copy #");
+		jtmodel.addColumn("Copy Number");
 		jtmodel.addColumn("Book Title");
 		jtmodel.addColumn("Availability");
 
@@ -82,7 +82,8 @@ public class BookWindow extends JFrame implements LibWindow {
 		jt.getColumnModel().getColumn(3).setPreferredWidth(70);
 		jt.getColumnModel().getColumn(3).setPreferredWidth(22);
 		JScrollPane sp = new JScrollPane(jt);
-		sp.setBounds(310, 20, 375, 340);
+		//sp.setBounds(310, 20, 375, 340);
+		sp.setBounds(20, 200, 800, 150);
 
 		// load books
 		List<Book> data = searchBookUseCase.getBookCollection();

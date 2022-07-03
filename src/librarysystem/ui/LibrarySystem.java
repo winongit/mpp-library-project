@@ -105,7 +105,7 @@ public class LibrarySystem extends JFrame implements LibWindow {
 		addBookCopy = new JMenuItem("Add Book Copy");
 		addBookCopy.addActionListener(new AddBookCopyListener());
 
-		addBook = new JMenuItem("Add Book");
+		addBook = new JMenuItem("Add New Book");
 		addBook.addActionListener(new AddBookListener());
 
 		printCheckOutRecord = new JMenuItem("Print Checkout Record");
