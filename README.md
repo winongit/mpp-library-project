@@ -46,32 +46,32 @@ When user logins as a Librarian he can print the checkout record for a particula
 
 ## Design
 ##### Use Case Diagram
-<img src="./docs/Library-UseCases.png" alt="Library Use Cases" width="800" height="400"/>
+<img src="./docs/Library-UseCases.jpg" alt="Library Use Cases" width="800" height="600"/>
 
 ##### Domain Class Diagram
 Below image is the domain object model for library system.
 <br/>
-<img src="./docs/DomainClasses.png" alt="Domain object model"  width="800" height="400"/>
+<img src="./docs/DomainClasses.jpg" alt="Domain object model"  width="800" height="400"/>
 
 ##### Overall Class Diagram
 Below image is the overall class diagram for library system. This is more on flow connecting with the UI, Controller and Data Access.
 <br/>
-<img src="./docs/OperationClassDiagram.png" alt="Overall"  width="800" height="500"/>
+<img src="./docs/OperationClassDiagram.jpg" alt="Overall"  width="800" height="500"/>
 
-##### Sequence Diagram - Log In Use Case
-<img src="./docs/LogInSeqenceDiagram.png" alt="Log In Sequence Diagram" width="800" height="300"/>
+##### 1. Sequence Diagram - Log In Use Case
+<img src="./docs/LogInSeqenceDiagram.jpg" alt="Log In Sequence Diagram" width="800" height="350"/>
 
-##### Sequence Diagram - Add Library Member Use Case
-<img src="./docs/AddLibraryMemberSequenceDiagram.png" alt="Add Library Member Sequence Diagram" width="800" height="300"/>
+##### 2. Sequence Diagram - Add Library Member Use Case
+<img src="./docs/AddLibraryMemberSequenceDiagram.jpg" alt="Add Library Member Sequence Diagram" width="800" height="350"/>
 
-##### Sequence Diagram - Checkout Book Use Case
+##### 3. Sequence Diagram - Checkout Book Use Case
 <img src="./docs/CheckOutBookSequenceDiagram.png" alt="Checkout Book Sequence Diagram" width="800" height="600"/>
 
-##### Sequence Diagram - Book Copy Use Case
-<img src="./docs/AddBookCopy.png" alt="Book Copy Sequence Diagram" width="800" height="300"/>
+##### 4. Sequence Diagram - Book Copy Use Case
+<img src="./docs/AddBookCopySequenceDiagram.jpg" alt="Book Copy Sequence Diagram" width="800" height="350"/>
 
-##### Sequence Diagram - Add Book Use Case
-<img src="./docs/AddNewBook.png" alt="Book Copy Sequence Diagram" width="800" height="300"/>
+##### 5. Sequence Diagram - Add Book Use Case
+<img src="./docs/AddNewBookSequenceDiagram.jpg" alt="Add New Book Sequence Diagram" width="800" height="350"/>
 
-##### Sequence Diagram - Print Checkout Records Use Case
+##### 6. Sequence Diagram - Print Checkout Records Use Case
 <img src="./docs/PrintCheckoutRecordSequenceDiagram.jpg" alt="Print Checkout Records Sequence Diagram" width="800" height="300"/>
