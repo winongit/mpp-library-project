@@ -20,6 +20,8 @@ This is the library system implementation for MPP Project
  If you want to be admin you should submit with ID: 102, and password: abc.
  If you want to be librarian you should submit with ID: 101, and password xyz.
  
+ If there is no default data, you can run the TestData.java under librarysystem.dataaccess package. This will create default data for this application.
+ 
 
 ##### 2. Add Library Member Use Case
 Admin can add new member and new book to the system, but can not check out book. If the user is both admin and
@@ -27,7 +29,7 @@ librarian he/she can also check out.
 
 ##### 3. Checkout Book Use Case
 Librarian can check out books if he enters the member ID and ISBN number correctly, otherwise system presents error.
-If the requested book and member ID axre found then librarian can create new record entry to this member.
+If the requested book and member ID are found then librarian can create new record entry to this member.
 
 ##### 4. Add Book Copy Use Case
 Admin can add new copies to the existing book by looking for the ISBN of that book.
