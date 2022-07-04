@@ -20,7 +20,7 @@ import librarysystem.business.usecase.CheckOutBookUseCase;
 import librarysystem.domain.BookCopy;
 import librarysystem.domain.CheckOutRecord;
 import librarysystem.domain.CheckOutRecordEntry;
-import librarysystem.domain.exception.BooCopyNotAvailableException;
+import librarysystem.domain.exception.BookCopyNotAvailableException;
 import librarysystem.domain.exception.BookNotFoundException;
 import librarysystem.domain.exception.MemberNotFoundException;
 
@@ -119,7 +119,7 @@ public class CheckoutBookWindow extends JFrame implements LibWindow {
                         checkOutBookUseCase.checkOutBook(memberID, bkISBN);
                         JOptionPane.showMessageDialog(this, "Checkout successful", "Thank you", JOptionPane.PLAIN_MESSAGE);
                         displayCheckoutInfo();
-                    } catch (BookNotFoundException | MemberNotFoundException | BooCopyNotAvailableException e) {
+                    } catch (BookNotFoundException | MemberNotFoundException | BookCopyNotAvailableException e) {
                         JOptionPane.showMessageDialog(this, e.getMessage(), "Check out book", JOptionPane.ERROR_MESSAGE);
                     }
             }

@@ -14,7 +14,7 @@ import librarysystem.domain.BookCopy;
 import librarysystem.domain.CheckOutRecord;
 import librarysystem.domain.CheckOutRecordEntry;
 import librarysystem.domain.LibraryMember;
-import librarysystem.domain.exception.BooCopyNotAvailableException;
+import librarysystem.domain.exception.BookCopyNotAvailableException;
 import librarysystem.domain.exception.BookNotFoundException;
 import librarysystem.domain.exception.MemberNotFoundException;
 
@@ -30,7 +30,7 @@ public class CheckOutBookController implements CheckOutBookUseCase {
 
 
 	@Override
-	public void checkOutBook(String memberId, String bookId) throws BookNotFoundException, MemberNotFoundException, BooCopyNotAvailableException {
+	public void checkOutBook(String memberId, String bookId) throws BookNotFoundException, MemberNotFoundException, BookCopyNotAvailableException {
 		DataAccess da = new DataAccessFacade();
 
 		Book book = searchBookUseCase.searchBook(bookId);
@@ -50,7 +50,7 @@ public class CheckOutBookController implements CheckOutBookUseCase {
 	 	BookCopy bookCopy = book.getNextAvailableCopy();
 	 	
 	 	if(bookCopy == null) {
-	 		throw new BooCopyNotAvailableException(book.getIsbn());
+	 		throw new BookCopyNotAvailableException(book.getIsbn());
 	 	}
 	 	
 	 	bookCopy.changeAvailability();
