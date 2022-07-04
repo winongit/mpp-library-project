@@ -72,3 +72,6 @@ Below image is the overall class diagram for library system. This is more on flo
 
 ##### Sequence Diagram - Add Book Use Case
 <img src="./docs/AddNewBook.png" alt="Book Copy Sequence Diagram" width="800" height="300"/>
+
+##### Sequence Diagram - Print Checkout Records Use Case
+<img src="./docs/PrintCheckoutRecordSequenceDiagram.jpg" alt="Print Checkout Records Sequence Diagram" width="800" height="300"/>

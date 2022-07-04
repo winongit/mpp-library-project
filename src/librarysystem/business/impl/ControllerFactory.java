@@ -7,6 +7,7 @@ import librarysystem.business.usecase.CheckMemberUseCase;
 import librarysystem.business.usecase.CheckOutBookUseCase;
 import librarysystem.business.usecase.GetAuthorUseCase;
 import librarysystem.business.usecase.LogInUseCase;
+import librarysystem.business.usecase.PrintCheckOutRecordUseCase;
 import librarysystem.business.usecase.SearchBookUseCase;
 
 public class ControllerFactory {
@@ -36,6 +37,11 @@ public class ControllerFactory {
 
 	public static CheckOutBookUseCase createCheckOutBookUseCase() {
 		CheckOutBookUseCase useCase = new CheckOutBookController();
+		return useCase;
+	}
+	
+	public static PrintCheckOutRecordUseCase createPrintCheckOutBookUseCase() {
+		PrintCheckOutRecordUseCase useCase = new CheckOutBookController();
 		return useCase;
 	}
 

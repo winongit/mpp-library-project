@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import librarysystem.business.impl.ControllerFactory;
-import librarysystem.business.usecase.CheckOutBookUseCase;
+import librarysystem.business.usecase.PrintCheckOutRecordUseCase;
 import librarysystem.domain.CheckOutRecord;
 import librarysystem.domain.CheckOutRecordEntry;
 
@@ -26,7 +26,7 @@ public class PrintCheckOutRecordWindow extends JFrame implements LibWindow {
 	private PrintCheckOutRecordWindow() {
 	}
 
-	CheckOutBookUseCase checkOutBookUseCase = ControllerFactory.createCheckOutBookUseCase();
+	PrintCheckOutRecordUseCase printCheckOutBookUseCase = ControllerFactory.createPrintCheckOutBookUseCase();
 	private boolean isInitialized = false;
 
 	JTextField txtMemberID;
@@ -111,7 +111,7 @@ public class PrintCheckOutRecordWindow extends JFrame implements LibWindow {
 	}
 	
 	private void displayCheckoutInfo() {
-		CheckOutRecord cr = checkOutBookUseCase.getCheckOutRecord(txtMemberID.getText());
+		CheckOutRecord cr = printCheckOutBookUseCase.getCheckOutRecord(txtMemberID.getText());
 		if (cr == null)
 			return;
 
