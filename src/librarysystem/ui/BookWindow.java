@@ -20,13 +20,13 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import business.impl.ControllerFactory;
-import business.usecase.AddBookUseCase;
-import business.usecase.GetAuthorUseCase;
-import business.usecase.SearchBookUseCase;
-import domain.Author;
-import domain.Book;
-import domain.BookCopy;
+import librarysystem.business.impl.ControllerFactory;
+import librarysystem.business.usecase.AddBookUseCase;
+import librarysystem.business.usecase.GetAuthorUseCase;
+import librarysystem.business.usecase.SearchBookUseCase;
+import librarysystem.domain.Author;
+import librarysystem.domain.Book;
+import librarysystem.domain.BookCopy;
 import librarysystem.util.Util;
 
 public class BookWindow extends JFrame implements LibWindow {

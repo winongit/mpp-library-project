@@ -11,11 +11,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import business.impl.ControllerFactory;
-import business.usecase.BookCopyUseCase;
-import domain.Author;
-import domain.Book;
-import domain.exception.BookNotFoundException;
+import librarysystem.business.impl.ControllerFactory;
+import librarysystem.business.usecase.BookCopyUseCase;
+import librarysystem.domain.Author;
+import librarysystem.domain.Book;
+import librarysystem.domain.exception.BookNotFoundException;
 
 public class BookCopyWindow extends JFrame implements LibWindow {
 

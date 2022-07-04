@@ -11,8 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import business.impl.SystemController;
-import business.usecase.ControllerInterface;
+import librarysystem.business.impl.SystemController;
+import librarysystem.business.usecase.ControllerInterface;
 import librarysystem.util.Util;
 
 

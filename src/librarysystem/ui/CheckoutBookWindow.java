@@ -15,14 +15,14 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import business.impl.ControllerFactory;
-import business.usecase.CheckOutBookUseCase;
-import domain.BookCopy;
-import domain.CheckOutRecord;
-import domain.CheckOutRecordEntry;
-import domain.exception.BooCopyNotAvailableException;
-import domain.exception.BookNotFoundException;
-import domain.exception.MemberNotFoundException;
+import librarysystem.business.impl.ControllerFactory;
+import librarysystem.business.usecase.CheckOutBookUseCase;
+import librarysystem.domain.BookCopy;
+import librarysystem.domain.CheckOutRecord;
+import librarysystem.domain.CheckOutRecordEntry;
+import librarysystem.domain.exception.BooCopyNotAvailableException;
+import librarysystem.domain.exception.BookNotFoundException;
+import librarysystem.domain.exception.MemberNotFoundException;
 
 public class CheckoutBookWindow extends JFrame implements LibWindow {
 

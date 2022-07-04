@@ -15,11 +15,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import business.impl.ControllerFactory;
-import business.usecase.AddLibraryMemberUseCase;
-import domain.Address;
-import domain.LibraryMember;
-import domain.exception.InvalidMemberException;
+import librarysystem.business.impl.ControllerFactory;
+import librarysystem.business.usecase.AddLibraryMemberUseCase;
+import librarysystem.domain.Address;
+import librarysystem.domain.LibraryMember;
+import librarysystem.domain.exception.InvalidMemberException;
 import librarysystem.util.Util;
 
 public class AddMemberWindow extends JFrame implements LibWindow {

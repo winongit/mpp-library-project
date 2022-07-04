@@ -13,10 +13,10 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import business.impl.ControllerFactory;
-import business.usecase.CheckOutBookUseCase;
-import domain.CheckOutRecord;
-import domain.CheckOutRecordEntry;
+import librarysystem.business.impl.ControllerFactory;
+import librarysystem.business.usecase.CheckOutBookUseCase;
+import librarysystem.domain.CheckOutRecord;
+import librarysystem.domain.CheckOutRecordEntry;
 
 public class PrintCheckOutRecordWindow extends JFrame implements LibWindow {
 
