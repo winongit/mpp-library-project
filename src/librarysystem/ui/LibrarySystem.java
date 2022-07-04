@@ -3,8 +3,6 @@ package librarysystem.ui;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collections;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -15,8 +13,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import librarysystem.business.impl.SystemController;
-import librarysystem.business.usecase.ControllerInterface;
 import librarysystem.dataaccess.Auth;
 import librarysystem.util.Util;
 
@@ -25,7 +21,6 @@ public class LibrarySystem extends JFrame implements LibWindow {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	ControllerInterface ci = new SystemController();
 	public final static LibrarySystem INSTANCE = new LibrarySystem();
 	JPanel mainPanel;
 	JMenuBar menuBar;
@@ -38,7 +33,6 @@ public class LibrarySystem extends JFrame implements LibWindow {
 	private static LibWindow[] allWindows = { 
 			LibrarySystem.INSTANCE, 
 			LoginWindow.INSTANCE,
-			AllBookIdsWindow.INSTANCE, 
 			AddMemberWindow.INSTANCE, 
 			BookWindow.INSTANCE, 
 			BookCopyWindow.INSTANCE,
@@ -142,30 +136,6 @@ public class LibrarySystem extends JFrame implements LibWindow {
 				doLogOut();
 			}
 			
-		}
-
-	}
-
-	class AllBookIdsListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			LibrarySystem.hideAllWindows();
-			AllBookIdsWindow.INSTANCE.init();
-
-			List<String> ids = ci.allBookIds();
-			Collections.sort(ids);
-			StringBuilder sb = new StringBuilder();
-			for (String s : ids) {
-				sb.append(s + "\n");
-			}
-			System.out.println(sb.toString());
-			AllBookIdsWindow.INSTANCE.setData(sb.toString());
-			AllBookIdsWindow.INSTANCE.pack();
-			// AllBookIdsWindow.INSTANCE.setSize(660,500);
-			Util.centerFrameOnDesktop(AllBookIdsWindow.INSTANCE);
-			AllBookIdsWindow.INSTANCE.setVisible(true);
-
 		}
 
 	}
