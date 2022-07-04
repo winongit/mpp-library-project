@@ -77,3 +77,6 @@ Below image is the overall class diagram for library system. This is more on flo
 
 ##### 6. Sequence Diagram - Print Checkout Records Use Case
 <img src="./docs/PrintCheckoutRecordSequenceDiagram.jpg" alt="Print Checkout Records Sequence Diagram" width="800" height="300"/>
+
+### GitHub Url
+https://github.com/winongit/mpp-library-project
